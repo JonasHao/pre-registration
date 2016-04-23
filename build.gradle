@@ -35,9 +35,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
     // spring
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework:spring-orm')
 
     // compile java ee 7
     compile('javax:javaee-api:7.0')
@@ -50,7 +51,14 @@ dependencies {
     // hibernate
     compile ('org.hibernate:hibernate-core:5.1.0.Final')
 
+    // jdbc
+    compile('mysql:mysql-connector-java:5.1.6')
+
 }
 
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
 
 

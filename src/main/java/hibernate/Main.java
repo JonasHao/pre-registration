@@ -30,13 +30,12 @@ public class Main {
         }
     }
 
-    public static Session getSession() throws HibernateException {
+    private static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        try {
+        try (Session session = getSession()) {
             System.out.println("querying all the managed entities...");
             final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
             for (Object key : metadataMap.keySet()) {
@@ -48,8 +47,6 @@ public class Main {
                     System.out.println("  " + o);
                 }
             }
-        } finally {
-            session.close();
         }
     }
 }

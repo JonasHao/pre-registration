@@ -1,0 +1,7 @@
+CREATE TABLE user (
+  id       INTEGER        NOT NULL AUTO_INCREMENT,
+  name     VARCHAR(45) NOT NULL,
+  password VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB;
