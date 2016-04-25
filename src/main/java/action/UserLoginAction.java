@@ -27,6 +27,8 @@ public class UserLoginAction extends DefaultActionSupport {
         return SUCCESS;
     }
 
+
+
     public String getName() {
         return name;
     }
