@@ -8,17 +8,20 @@ public class Department {
     private String type;
     private int id;
 
-    public Department(String name, String type,int id) {
+    public Department(String name, String type, int id) {
         this.name = name;
         this.type = type;
-        this.id=id;
+        this.id = id;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }

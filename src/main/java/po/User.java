@@ -1,6 +1,5 @@
 package po;
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -8,10 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class User extends Person {
     private long id;
     private String name;
-    private String password;
+    private long password;
+
+    public User(String name, long password) {
+        this.name = name;
+        this.password = password;
+    }
+
+    public User() {
+    }
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -32,11 +39,11 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
+    public long getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(long password) {
         this.password = password;
     }
 }

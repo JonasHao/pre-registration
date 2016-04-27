@@ -9,17 +9,14 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-    <title>登陆</title>
+    <title>主页</title>
 </head>
 <body>
-<s:form action="login" validate="false">
-    <s:textfield label="User Name"  required="false"/>
-    <s:password label="Password" required="false"/>
-    <s:iterator value="errors">
-        <s:property/>
-    </s:iterator>
-    <s:submit value="login"/>
-</s:form>
+<ul>
+    <li><a href="login.jsp">登陆</a></li>
+    <li><a href="signUp.jsp">注册</a></li>
+</ul>
+
 </body>
 
 </html>

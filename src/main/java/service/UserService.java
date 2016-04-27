@@ -8,6 +8,6 @@ import java.util.List;
  */
 public interface UserService {
      String addUser(User user);
-     List<User> findUserByName(String name);
+     User findUserByName(String name);
      List<User> listAll();
 }

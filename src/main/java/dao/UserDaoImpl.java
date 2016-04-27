@@ -1,5 +1,7 @@
 package dao;
 
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.dao.DataAccessException;
 import po.User;
 
@@ -7,32 +9,35 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-//@SuppressWarnings("ALL")
-public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
+public class UserDaoImpl implements UserDao {
+
+    private SessionFactory sessionFactory;
+
+
     @Override
     public String addUser(User user) {
-        String success = "";
-        String name = user.getName();
-        if (findUserByName(name).size() == 0) {
-            try {
-                getHibernateTemplate().save(user);
-                success = "User saved ok!";
-            } catch (DataAccessException e) {
-                success = "Sorry, user can't be added.";
-            }
-        } else {
-            success = "The username was existed!";
-        }
-        return success;
+        sessionFactory.getCurrentSession().beginTransaction();
+        sessionFactory.getCurrentSession().save(user);
+        sessionFactory.getCurrentSession().close();
+        return "ok";
     }
 
     @Override
     public List<User> findUserByName(String name) {
-        return (List<User>) getHibernateTemplate().find("from User where name = ?", name);
+        sessionFactory.getCurrentSession().beginTransaction();
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where name = ?").setParameter(0, name);
+
+        query.list().forEach(System.out::println);
+        return query.list();
     }
 
     @Override
     public List<User> listAll() {
-        return (List<User>) getHibernateTemplate().find(" from User ");
+        sessionFactory.getCurrentSession().beginTransaction();
+        return (List<User>) sessionFactory.getCurrentSession().createQuery(" from User ");
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

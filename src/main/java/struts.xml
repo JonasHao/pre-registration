@@ -7,11 +7,38 @@
 <struts>
     <package name="default" namespace="/" extends="struts-default">
 
-        <action name="login" class="action.UserLoginAction" method="execute">
+        <action name="login" class="action.UserAction" method="login">
             <result name="input">login.jsp</result>
             <result name="error">error.jsp</result>
             <result name="success">welcome.jsp</result>
         </action>
+
+        <action name="signUp" class="action.UserAction" method="singUp">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="register" class="action.RegistrationAction" method="register">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="unRegister" class="action.RegistrationAction" method="unRegister">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="createPatient" class="action.PatientAction" method="create">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="modifyPatient" class="action.PatientAction" method="modify">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="deletePatient" class="action.PatientAction" method="delete">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+
+
 
     </package>
 

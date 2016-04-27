@@ -10,7 +10,6 @@ public class DepartmentAction extends DefaultActionSupport {
     @Override
     public String execute() throws Exception {
 
-
         return super.execute();
     }
 }

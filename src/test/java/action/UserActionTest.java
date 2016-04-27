@@ -1,22 +1,15 @@
 package action;
 
-import action.UserLoginAction;
-import com.opensymphony.xwork2.Action;
 import junit.framework.TestCase;
-import org.junit.Assert;
-import org.springframework.context.ApplicationContext;
-import po.User;
-import service.UserService;
-import utils.InitApplicationContext;
 
-public class UserLoginActionTest extends TestCase {
+public class UserActionTest extends TestCase {
 //    private User user;
 //    private UserService userService;
 //    private ApplicationContext context = null;
-//    private UserLoginAction loginAction = null;
+//    private UserAction loginAction = null;
     public void setUp(){
 //        context = InitApplicationContext.getApplicationContext();
-//        loginAction = new UserLoginAction();
+//        loginAction = new UserAction();
 //        userService = (UserService)context.getBean("userService");
     }
     //注：需要先执行UserDaoTest测试
