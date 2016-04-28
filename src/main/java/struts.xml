@@ -25,15 +25,15 @@
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="createPatient" class="action.PatientAction" method="create">
+        <action name="createPatient" class="action.PersonAction" method="create">
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="modifyPatient" class="action.PatientAction" method="modify">
+        <action name="modifyPatient" class="action.PersonAction" method="modify">
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="deletePatient" class="action.PatientAction" method="delete">
+        <action name="deletePatient" class="action.PersonAction" method="delete">
             <result name="success">welcome.jsp</result>
         </action>
 

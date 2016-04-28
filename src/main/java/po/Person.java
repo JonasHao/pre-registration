@@ -1,16 +1,26 @@
 package po;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Koche on 2016/4/27.
  */
+@Entity
 class Person {
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
 
     private String name;
-    private String ID;
+    private String idNo;
     private String phone;
-    private int gender;
 
+    private long ownerId;
 
+    @Id
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
 }

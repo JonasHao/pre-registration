@@ -2,12 +2,10 @@ package dao;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.springframework.dao.DataAccessException;
 import po.User;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class UserDaoImpl implements UserDao {
 
@@ -25,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> findUserByName(String name) {
         sessionFactory.getCurrentSession().beginTransaction();
-        Query query = sessionFactory.getCurrentSession().createQuery("from User where name = ?").setParameter(0, name);
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where username = ?").setParameter(0, name);
 
         query.list().forEach(System.out::println);
         return query.list();

@@ -1,6 +1,5 @@
 package dao;
 
-import dao.UserDao;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.springframework.context.ApplicationContext;
@@ -27,12 +26,12 @@ public class UserDaoTest extends TestCase {
     }
     public void testAddUser() throws Exception {
         user = new User();
-        user.setName("username");
+        user.setUsername("username");
         user.setPassword("password");
         userDAO.addUser(user);
         Assert.assertNotNull(user.getId());
         User userTwo = new User();
-        userTwo.setName("username1");
+        userTwo.setUsername("username1");
         userTwo.setPassword("password");
         userDAO.addUser(userTwo);
         Assert.assertNotNull( user.getId());

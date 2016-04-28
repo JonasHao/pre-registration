@@ -2,18 +2,22 @@ package po;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class User extends Person {
+public class User {
     private long id;
-    private String name;
+    private String username;
     private long password;
 
-    public User(String name, long password) {
-        this.name = name;
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
+    private List<Person> persons;
+
+
+    public User(String username, long password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -31,12 +35,12 @@ public class User extends Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public long getPassword() {
@@ -46,4 +50,6 @@ public class User extends Person {
     public void setPassword(long password) {
         this.password = password;
     }
+
+
 }
