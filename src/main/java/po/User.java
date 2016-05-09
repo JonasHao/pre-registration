@@ -3,17 +3,12 @@ package po;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class User {
     private long id;
     private String username;
     private long password;
-
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
-    private List<Person> persons;
 
 
     public User(String username, long password) {

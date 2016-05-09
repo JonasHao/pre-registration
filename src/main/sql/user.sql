@@ -1,7 +1,9 @@
 CREATE TABLE user (
-  id       INTEGER        NOT NULL AUTO_INCREMENT,
-  name     VARCHAR(45) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  id       VARCHAR(20) NOT NULL,
+  password VARCHAR(64) NOT NULL,
+  phone    VARCHAR(20) NOT NULL,
+  email    VARCHAR(100),
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB;
+
