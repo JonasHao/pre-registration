@@ -1,19 +1,30 @@
 package po;
 
+import javax.persistence.*;
+
 /**
  * Created by jinzil on 2016/4/25.
  */
-public class Department {
-    private String name;
-    private String type;
-    private int id;
 
-    public Department(String name, String type, int id) {
+@Entity
+public class Department {
+    private int id;
+    private String name;
+    private String description;
+    private Hospital hospital;
+
+
+    @SuppressWarnings("unused")
+    public Department(String name, String description, int id) {
         this.name = name;
-        this.type = type;
+        this.description = description;
         this.id = id;
     }
 
+    public Department() {
+    }
+
+    @Id
     public int getId() {
         return id;
     }
@@ -30,11 +41,21 @@ public class Department {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String type) {
+        this.description = type;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hospitalID", nullable = false)
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 }

@@ -1,9 +1,11 @@
 package dao;
 
-import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import po.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -14,25 +16,39 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String addUser(User user) {
-        sessionFactory.getCurrentSession().beginTransaction();
-        sessionFactory.getCurrentSession().save(user);
-        sessionFactory.getCurrentSession().close();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(user);
+        transaction.commit();
+        session.flush();
+        session.close();
         return "ok";
     }
 
     @Override
-    public List<User> findUserByName(String name) {
+    public User findUserByID(String ID) {
         sessionFactory.getCurrentSession().beginTransaction();
-        Query query = sessionFactory.getCurrentSession().createQuery("from User where username = ?").setParameter(0, name);
 
-        query.list().forEach(System.out::println);
-        return query.list();
+        List list = sessionFactory.getCurrentSession().
+                createQuery("from User where ID = ?").
+                setParameter(0, ID).list();
+
+        if (list.size()>0) {
+            Object object = list.get(0);
+            System.out.println(object);
+            return (User) object;
+        }
+
+        return null;
     }
 
     @Override
     public List<User> listAll() {
-        sessionFactory.getCurrentSession().beginTransaction();
-        return (List<User>) sessionFactory.getCurrentSession().createQuery(" from User ");
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        @SuppressWarnings("unchecked")
+        List<User> list = sessionFactory.getCurrentSession().createQuery(" from User ").list();
+        return list;
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

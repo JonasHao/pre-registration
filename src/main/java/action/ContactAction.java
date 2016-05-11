@@ -6,7 +6,7 @@ import org.apache.struts2.dispatcher.DefaultActionSupport;
  * Created by Koche on 2016/4/27.
  * 存储常用病人信息
  */
-public class PersonAction extends DefaultActionSupport {
+public class ContactAction extends DefaultActionSupport {
     public String create() throws Exception {
         return SUCCESS;
     }

@@ -7,11 +7,13 @@ import service.UserService;
 
 public class UserAction extends DefaultActionSupport {
 
-    private String name;
+    /* 登陆 */
     private String username;
     private String password;
-    private String id;
+    /* 注册 */
+    private String passwordAgain;
     private String phone;
+    private String email;
 
     private UserService mService;
 
@@ -19,32 +21,69 @@ public class UserAction extends DefaultActionSupport {
     }
 
     public String login() throws Exception {
-        User user = mService.findUserByName(name);
-        if (user == null) {
-            return INPUT;
+        if (validateUsername()) {
+            User user = mService.findUserByID(username);
+            if (user == null) {
+                addFieldError("username", "这个用户名尚未注册");
+                return INPUT;
+            }
+
+            if (password.hashCode() != user.getPassword()) {
+                addFieldError("password", "密码错误");
+                return INPUT;
+            }
+
+            return SUCCESS;
         }
 
-        if (password.hashCode() != user.getPassword()) {
-            return ERROR;
-        }
-
-        return SUCCESS;
+        return INPUT;
     }
 
     public String singUp() throws Exception {
-        User user = new User(name, password.hashCode());
-        mService.addUser(user);
-        return SUCCESS;
+        if (validateUsername() && validatePassword()) {
+
+            if (!password.equals(passwordAgain)) {
+                addFieldError("passwordAgain", "两次密码输入不一致");
+            }
+
+            User user = mService.findUserByID(username);
+            if (user != null) {
+                addFieldError("username", "用户名已经被占用");
+                return INPUT;
+            }
+
+            user = new User(username, password.hashCode(), phone);
+
+            mService.addUser(user);
+            return SUCCESS;
+
+        }
+        return INPUT;
     }
 
 
-    public String getName() {
-        return name;
+    /**
+     * 校验用户名
+     */
+    private boolean validateUsername() {
+        if (username != null && username.matches("^[a-z0-9_-]{3,15}$")) {
+            return true;
+        }
+        addFieldError("username", "用户名不符合规范");
+        return false;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * 校验密码，只能包含数字、字母、下划线、符号，长度为6-20位
+     */
+    private boolean validatePassword() {
+        if (!password.isEmpty() && password.matches("[0-9a-zA-Z!@#$%^?,./]{6,20}")) {
+            return true;
+        }
+        addFieldError("password", "密码不符合规范");
+        return false;
     }
+
 
     public String getUsername() {
         return username;
@@ -62,12 +101,12 @@ public class UserAction extends DefaultActionSupport {
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getPasswordAgain() {
+        return passwordAgain;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPasswordAgain(String passwordAgain) {
+        this.passwordAgain = passwordAgain;
     }
 
     public String getPhone() {
@@ -78,9 +117,19 @@ public class UserAction extends DefaultActionSupport {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setUserService(UserService userService) {
         mService = userService;
     }
+
+
 }
 
 

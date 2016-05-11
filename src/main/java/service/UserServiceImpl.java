@@ -8,30 +8,28 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
+
     @Override
-    public String addUser(User user) {
-        return userDao.addUser(user);
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 
     @Override
-    public User findUserByName(String name) {
-        List<User> list = userDao.findUserByName(name);
-        if (list.size() == 0) {
-            return null;
-        }
-        return list.get(0);
+    public User findUserByID(String name) {
+        return userDao.findUserByID(name);
     }
 
     @Override
     public List<User> listAll() {
         return userDao.listAll();
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return null;
     }
 }

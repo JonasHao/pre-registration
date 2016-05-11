@@ -12,13 +12,13 @@
     <title>登陆</title>
 </head>
 <body>
-<s:form action="login" validate="false">
-    <s:textfield label="User Name"  required="false"/>
-    <s:password label="Password" required="false"/>
+<s:form action="login" validate="true">
+    <s:textfield name="username"  label="用户名" maxLength="20"  required="true"/>
+    <s:password name="password" label="密码" maxLength="16" required="true"/>
     <s:iterator value="errors">
         <s:property/>
     </s:iterator>
-    <s:submit value="login"/>
+    <s:submit value="登陆"/>
 </s:form>
 </body>
 </html>

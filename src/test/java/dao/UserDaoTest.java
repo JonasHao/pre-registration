@@ -26,15 +26,15 @@ public class UserDaoTest extends TestCase {
     }
     public void testAddUser() throws Exception {
         user = new User();
-        user.setUsername("username");
+        user.setID("username");
         user.setPassword("password");
         userDAO.addUser(user);
-        Assert.assertNotNull(user.getId());
+        Assert.assertNotNull(user.getID());
         User userTwo = new User();
-        userTwo.setUsername("username1");
+        userTwo.setID("username1");
         userTwo.setPassword("password");
         userDAO.addUser(userTwo);
-        Assert.assertNotNull( user.getId());
+        Assert.assertNotNull( user.getID());
     }
     public void testListAll() throws Exception {
         List<User> users = userDAO.listAll();

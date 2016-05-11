@@ -10,11 +10,20 @@
         <action name="login" class="action.UserAction" method="login">
             <result name="input">login.jsp</result>
             <result name="error">error.jsp</result>
-            <result name="success">welcome.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">display</param>
+            </result>
         </action>
 
         <action name="signUp" class="action.UserAction" method="singUp">
-            <result name="success">welcome.jsp</result>
+            <result name="input">signUp.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">display</param>
+            </result>
+        </action>
+
+        <action name="display" class="action.DisplayAction">
+            <result name="success">display.jsp</result>
         </action>
 
         <action name="register" class="action.RegistrationAction" method="register">
@@ -25,19 +34,17 @@
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="createPatient" class="action.PersonAction" method="create">
+        <action name="createPatient" class="action.ContactAction" method="create">
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="modifyPatient" class="action.PersonAction" method="modify">
+        <action name="modifyPatient" class="action.ContactAction" method="modify">
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="deletePatient" class="action.PersonAction" method="delete">
+        <action name="deletePatient" class="action.ContactAction" method="delete">
             <result name="success">welcome.jsp</result>
         </action>
-
-
 
 
     </package>

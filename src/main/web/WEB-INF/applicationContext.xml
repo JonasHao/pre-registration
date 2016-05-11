@@ -15,8 +15,45 @@
     <bean id="userService" class="service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
-    <bean class="action.UserAction" id="userAction">
+
+    <bean id="userAction" class="action.UserAction">
         <property name="userService" ref="userService"/>
+    </bean>
+
+
+    <bean id="doctorService" class="service.DoctorServiceImpl">
+    </bean>
+
+    <bean id="capacityService" class="service.CapacityServiceImpl">
+        <property name="capacityDao" ref="capacityDao"/>
+    </bean>
+
+    <bean id="registrationDao" class="dao.RegistrationDaoImpl">
+
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="registrationService" class="service.RegistrationServiceImpl">
+        <property name="registrationDao" ref="registrationDao"/>
+    </bean>
+
+    <bean id="capacityDao" class="dao.CapacityDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="registrationAction" class="action.RegistrationAction">
+        <property name="doctorService" ref="doctorService"/>
+        <property name="capacityService" ref="capacityService"/>
+        <property name="userService" ref="userService"/>
+        <property name="registrationService" ref="registrationService"/>
+    </bean>
+
+    <bean class="dao.HospitalDaoImpl" id="hospitalDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="action.DisplayAction" id="displayAction">
+        <property name="hospitalDao" ref="hospitalDao"/>
     </bean>
 
 

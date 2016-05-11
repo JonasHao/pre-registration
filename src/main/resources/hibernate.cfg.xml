@@ -29,7 +29,8 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping class="po.User"/>
-        <mapping class="po.Contact"/>
+        <mapping class="po.Hospital"/>
+        <mapping class="po.Department"/>
 
 
     </session-factory>

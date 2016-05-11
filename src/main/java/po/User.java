@@ -1,41 +1,32 @@
 package po;
 
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 public class User {
-    private long id;
-    private String username;
+    private String ID;
+    private String phone;
+    private String email;
     private long password;
 
 
-    public User(String username, long password) {
-        this.username = username;
+    public User(String ID, long password, String phone) {
+        this.ID = ID;
         this.password = password;
+        this.phone = phone;
     }
 
     public User() {
     }
 
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    public long getId() {
-        return id;
+    public String getID() {
+        return ID;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String name) {
-        this.username = name;
+    public void setID(String name) {
+        this.ID = name;
     }
 
     public long getPassword() {
@@ -46,5 +37,24 @@ public class User {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return ID;
+    }
 }
