@@ -26,6 +26,25 @@
             <result name="success">display.jsp</result>
         </action>
 
+        <action name="createContact" class="action.ContactAction" method="create">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="deleteContact" class="action.ContactAction" method="delete">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="modifyContact" class="action.ContactAction" method="modify">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+        <action name="selectContact" class="action.ContactAction" method="query">
+            <result name="success" type="redirectAction">
+                <param name="actionName">display</param>
+            </result>
+        </action>
+
+
         <action name="register" class="action.RegistrationAction" method="register">
             <result name="success">welcome.jsp</result>
         </action>
@@ -34,17 +53,7 @@
             <result name="success">welcome.jsp</result>
         </action>
 
-        <action name="createPatient" class="action.ContactAction" method="create">
-            <result name="success">welcome.jsp</result>
-        </action>
 
-        <action name="modifyPatient" class="action.ContactAction" method="modify">
-            <result name="success">welcome.jsp</result>
-        </action>
-
-        <action name="deletePatient" class="action.ContactAction" method="delete">
-            <result name="success">welcome.jsp</result>
-        </action>
 
 
     </package>

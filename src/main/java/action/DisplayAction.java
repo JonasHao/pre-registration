@@ -1,8 +1,12 @@
 package action;
 
+import dao.ContactDao;
+import dao.ContactDaoImpl;
 import dao.HospitalDao;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
+import po.Contact;
 import po.Hospital;
+import service.UserService;
 
 import java.util.List;
 
@@ -12,11 +16,18 @@ import java.util.List;
  */
 public class DisplayAction extends DefaultActionSupport {
     private List<Hospital> hospitals;
+    private List<Contact> contacts;
     private HospitalDao mHospitalDao;
+    private ContactDao mContactDao;
+    private UserService mUserService;
+
+    private Hospital selectedHospital;
 
 
     public String execute() throws Exception {
         hospitals = mHospitalDao.all();
+        String userID = mUserService.getCurrentUser().getID();
+        contacts = mContactDao.allOfUser(userID);
         return SUCCESS;
     }
 
@@ -24,11 +35,34 @@ public class DisplayAction extends DefaultActionSupport {
         return hospitals;
     }
 
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+
     public void setHospitals(List<Hospital> hospitals) {
         this.hospitals = hospitals;
     }
 
     public void setHospitalDao(HospitalDao hospitalDao) {
         mHospitalDao = hospitalDao;
+    }
+
+
+    public void setUserService(UserService userService) {
+        mUserService = userService;
+    }
+
+    public Hospital getSelectedHospital() {
+        return selectedHospital;
+    }
+
+    public void setSelectedHospital(Hospital selectedHospital) {
+        this.selectedHospital = selectedHospital;
+    }
+
+
+    public void setContactDao(ContactDao contactDao) {
+        mContactDao = contactDao;
     }
 }

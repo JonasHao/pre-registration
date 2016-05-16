@@ -1,6 +1,7 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by jinzil on 2016/4/25.
@@ -12,6 +13,7 @@ public class Department {
     private String name;
     private String description;
     private Hospital hospital;
+    private Set<Doctor> doctors;
 
 
     @SuppressWarnings("unused")
@@ -57,5 +59,14 @@ public class Department {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    public Set<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Set<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }

@@ -1,27 +1,36 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Koche
-  Date: 2016/5/11
-  Time: 11:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>预约下单</title>
 </head>
+
 <body>
 
-<s:iterator status="stat" value="hospitals">
-    <s:property value="ID"/>
-    <s:property value="name"/>
-    <s:property value="description"/>
-    <s:iterator value="departments">
-        <s:property value="id"/>
-        <s:property value="name"/>
-        <s:property value="description"/>
+<ul>
+    <s:iterator status="stat" value="hospitals">
+        <li>
+            <s:property value="ID"/>
+            <s:property value="name"/>
+            <s:property value="description"/>
+        </li>
+        <s:iterator value="departments">
+            <s:property value="[0].id"/>
+            <s:property value="[0].name"/>
+            <s:property value="[0].description"/>
+        </s:iterator>
     </s:iterator>
-</s:iterator>
+
+</ul>
+
+
+<s:form action="register">
+    <s:select value="contactID" list="${applicationScope.contacts}" listkey="idNo" listvalue="name"/>
+    <s:date name="reserveDate"/>
+    <s:textfield name="doctorID" value="doctor ID"/>
+    <s:submit value="提交"/>
+</s:form>
+
+
 </body>
 </html>

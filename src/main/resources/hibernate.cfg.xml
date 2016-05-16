@@ -21,7 +21,7 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <!-- Echo all executed SQL to stdout -->
+        <!-- Echo allOfUser executed SQL to stdout -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
@@ -31,6 +31,9 @@
         <mapping class="po.User"/>
         <mapping class="po.Hospital"/>
         <mapping class="po.Department"/>
+        <mapping class="po.Doctor"/>
+        <mapping class="po.Registration"/>
+        <mapping class="po.Capacity"/>
 
 
     </session-factory>

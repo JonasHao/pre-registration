@@ -54,6 +54,11 @@
     </bean>
     <bean class="action.DisplayAction" id="displayAction">
         <property name="hospitalDao" ref="hospitalDao"/>
+        <property name="userService" ref="userService"/>
+        <property name="contactDao" ref="contactDao"/>
+    </bean>
+    <bean class="dao.ContactDaoImpl" id="contactDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
 

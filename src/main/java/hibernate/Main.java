@@ -36,7 +36,7 @@ public class Main {
 
     public static void main(final String[] args) throws Exception {
         try (Session session = getSession()) {
-            System.out.println("querying all the managed entities...");
+            System.out.println("querying allOfUser the managed entities...");
             final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
             for (Object key : metadataMap.keySet()) {
                 final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);

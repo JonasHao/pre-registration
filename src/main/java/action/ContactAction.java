@@ -1,12 +1,20 @@
 package action;
 
+import dao.ContactDao;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
+import po.Contact;
+
+import java.util.Set;
 
 /**
  * Created by Koche on 2016/4/27.
  * 存储常用病人信息
  */
 public class ContactAction extends DefaultActionSupport {
+    private Set<Contact> contacts;
+    private ContactDao mContactDao;
+
+
     public String create() throws Exception {
         return SUCCESS;
     }
@@ -21,5 +29,13 @@ public class ContactAction extends DefaultActionSupport {
 
     public String query() throws Exception {
         return SUCCESS;
+    }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

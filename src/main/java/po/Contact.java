@@ -7,7 +7,7 @@ import javax.persistence.Id;
  * Created by Koche on 2016/4/27.
  */
 @Entity
-class Contact {
+public class Contact {
     private String name;
     private String idNo;
     private String phone;

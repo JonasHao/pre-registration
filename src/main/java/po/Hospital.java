@@ -49,6 +49,11 @@ public class Hospital {
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
 
