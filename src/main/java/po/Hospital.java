@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * Created by Koche on 2016/5/10.
+ * 医院的Pure Object
  */
 @Entity
 public class Hospital {
@@ -41,18 +42,13 @@ public class Hospital {
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hospital")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hospital")
     public Set<Department> getDepartments() {
         return departments;
     }
 
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
 

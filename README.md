@@ -2,43 +2,59 @@
 在线挂号系统
 
 ## Todo List
- - 完成需求文档
- - 设计系统架构
- - 数据库设计
+按照重要程度排序，完成之后， “-” 变成 “+”
 
-## 配置
->请注意，只需安装Intellij，gradle。
->其他部分gradle可以自动配置。
+- 需求文档
 
-导入项目之前，首先将gradle解压到你想要的目录,
-然后参考 配置指导
+- 为以下项设计数据库、类（Service/DAO/PO...)、动态图，这些都不需考虑权限
+    - 查询医院
+        + 查询所有
+        - 根据区域
+        - 医院名字
+    - 查询科室
+        + 根据医院ID
+        - 医院名字
+        - 科室ID
+        - 科室名字
+    - 查询医生
+        - 根据科室ID
+        - 医生ID
+        - 医生名字
+        - 专长科
+    - 查询余量
+        - 根据时间和医生ID
 
-1. IDE: Intellij 2016.1.1 高级版
-2. Gradle: Gradle 2.12
-3. JDK: Java SE Development Kit 8 (推荐：8u73)
-5. Tomcat: Apache Tomcat 9.0.0.M4
+- 权限设计和解决方案
 
+- 前端
+    - 列表页
+        - 首页医院列表
+        - 医生列表
+        - 医院后台管理页
+        - 科室后台管理页
+        - 医生后台管理页
+    - 详细页
+        - 医院详细页（医院介绍和科室列表）
+        - 医生详细页（医生介绍和医生挂号余量日历表）
+    - 欢迎页
+        - 后台管理页面
+    - 登录注册页
 
-## 下载地址
-[Intellij](https://www.jetbrains.com/idea/download/) 高级版
+- 用户管理
+    + 用户注册
+    + 用户登录
+    - 用户修改个人信息
+    - 用户查询联系人
+    - 用户添加联系人
+    - 用户修改联系人
+    - 用户删除联系人
 
-[Gradle](http://gradle.org/gradle-download/) 下载Binary only distribution
+- 订单管理
+    - 创建订单
+    - 取消订单
 
-[JDK](http://www.oracle.com/technetwork/cn/java/javase/downloads/jdk8-downloads-2133151-zhs.html)
-
-[Tomcat](http://tomcat.apache.org/download-90.cgi)
-
-
-## 配置指导
-### 导入项目
-![](doc/img/0.png)
-### 选择项目路径（git拉下来的目录下）
-![](doc/img/1.png)
-
-以上两步也可以通过intellij的Import from Version Control  - Git 完成
-
-### 通过Gradle导入
-![](doc/img/2.png)
-### 选择本地Gradle
-![](doc/img/3.png)
+- 增删改
+    - 医院
+    - 科室
+    - 医生
 

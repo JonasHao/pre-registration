@@ -73,6 +73,7 @@
           <element id="library" level="project" name="Gradle: asm:asm-tree:3.3" />
           <element id="library" level="project" name="Gradle: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Gradle: org.apache.tomcat.embed:tomcat-embed-core:8.0.32" />
+          <element id="file-copy" path="$APPLICATION_CONFIG_DIR$/jdbc-drivers/mysql-connector-java-5.1.35-bin.jar" />
         </element>
       </element>
     </root>

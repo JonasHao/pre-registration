@@ -52,13 +52,14 @@
     <bean class="dao.HospitalDaoImpl" id="hospitalDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <bean class="action.DisplayAction" id="displayAction">
+    <bean class="action.HospitalAction" id="displayAction">
         <property name="hospitalDao" ref="hospitalDao"/>
-        <property name="userService" ref="userService"/>
-        <property name="contactDao" ref="contactDao"/>
     </bean>
-    <bean class="dao.ContactDaoImpl" id="contactDao">
+    <bean class="dao.DepartmentDaoImpl" id="departmentDao">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="action.DepartmentAction" id="departmentAction">
+        <property name="departmentDao" ref="departmentDao"/>
     </bean>
 
 

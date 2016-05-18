@@ -11,39 +11,24 @@
             <result name="input">login.jsp</result>
             <result name="error">error.jsp</result>
             <result name="success" type="redirectAction">
-                <param name="actionName">display</param>
+                <param name="actionName">displayHospitals</param>
             </result>
         </action>
 
         <action name="signUp" class="action.UserAction" method="singUp">
             <result name="input">signUp.jsp</result>
             <result name="success" type="redirectAction">
-                <param name="actionName">display</param>
+                <param name="actionName">displayHospitals</param>
             </result>
         </action>
 
-        <action name="display" class="action.DisplayAction">
-            <result name="success">display.jsp</result>
+        <action name="displayHospitals" class="action.HospitalAction">
+            <result name="success">hospitals.jsp</result>
         </action>
 
-        <action name="createContact" class="action.ContactAction" method="create">
-            <result name="success">welcome.jsp</result>
+        <action name="displayDepartments" class="action.DepartmentAction" method="queryDepartments">
+            <result name="success">departments.jsp</result>
         </action>
-
-        <action name="deleteContact" class="action.ContactAction" method="delete">
-            <result name="success">welcome.jsp</result>
-        </action>
-
-        <action name="modifyContact" class="action.ContactAction" method="modify">
-            <result name="success">welcome.jsp</result>
-        </action>
-
-        <action name="selectContact" class="action.ContactAction" method="query">
-            <result name="success" type="redirectAction">
-                <param name="actionName">display</param>
-            </result>
-        </action>
-
 
         <action name="register" class="action.RegistrationAction" method="register">
             <result name="success">welcome.jsp</result>
@@ -52,8 +37,6 @@
         <action name="unRegister" class="action.RegistrationAction" method="unRegister">
             <result name="success">welcome.jsp</result>
         </action>
-
-
 
 
     </package>

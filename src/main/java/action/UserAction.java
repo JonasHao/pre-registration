@@ -1,8 +1,11 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 import po.User;
 import service.UserService;
+
+import java.util.Map;
 
 
 public class UserAction extends DefaultActionSupport {
@@ -32,6 +35,10 @@ public class UserAction extends DefaultActionSupport {
                 addFieldError("password", "密码错误");
                 return INPUT;
             }
+            ActionContext context = ActionContext.getContext();
+            Map session = context.getSession();
+
+
 
             return SUCCESS;
         }

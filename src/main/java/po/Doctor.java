@@ -1,17 +1,17 @@
 package po;
 
-import javax.persistence.*;
+import java.util.Map;
 
 /**
  * Created by Koche on 2016/5/10.
  */
-@Entity
 public class Doctor {
     private long ID;
     private String name;
     private Department department;
+    private Hospital hospital;
+    private Map<Long,Integer> leftCapacity;
 
-    @Id
     public long getID() {
         return ID;
     }
@@ -28,8 +28,10 @@ public class Doctor {
         this.name = name;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "departmentID", nullable = false)
+    public Map<Long, Integer> getLeftCapacity() {
+        return leftCapacity;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -38,5 +40,15 @@ public class Doctor {
         this.department = department;
     }
 
+    public Hospital getHospital() {
+        return hospital;
+    }
 
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    public void setLeftCapacity(Map<Long, Integer> leftCapacity) {
+        this.leftCapacity = leftCapacity;
+    }
 }
