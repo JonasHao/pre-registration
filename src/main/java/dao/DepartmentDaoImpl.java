@@ -11,6 +11,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private SessionFactory mSessionFactory;
 
     @Override
+    public Department get(long departmentID) {
+        Session session=mSessionFactory.getCurrentSession();
+        session.beginTransaction();
+        return session.get(Department.class,departmentID);
+    }
+
+    @Override
     public List<Department> getAllOfHospital(long hospitalID) {
         Session session = mSessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -21,6 +28,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return result;
         return null;
     }
+
+
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         mSessionFactory = sessionFactory;

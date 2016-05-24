@@ -1,10 +1,9 @@
 package service;
 
-import java.util.Calendar;
+import po.Capacity;
 
-/**
- * Created by Koche on 2016/5/10.
- */
 public interface CapacityService {
-    int queryCapacityByDateAndDoctorID(Calendar calendar, long doctorID);
+    void refresh(Capacity capacity);
+
+    Capacity get(long id);
 }

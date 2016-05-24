@@ -1,6 +1,8 @@
 package po;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jinzil on 2016/4/25.
@@ -8,10 +10,13 @@ import javax.persistence.*;
  */
 @Entity
 public class Department {
-    private int id;
+    private long id;
     private String name;
     private String description;
+
     private Hospital hospital;
+    private List<Doctor> doctors = new ArrayList<>(10);
+    private List<Order> orders = new ArrayList<>(10);
 
 
     @SuppressWarnings("unused")
@@ -25,11 +30,12 @@ public class Department {
     }
 
     @Id
-    public int getId() {
+    @GeneratedValue
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,5 +63,23 @@ public class Department {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

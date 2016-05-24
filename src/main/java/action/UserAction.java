@@ -2,6 +2,8 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
+import org.springframework.beans.factory.support.SecurityContextProvider;
+import org.springframework.security.core.context.SecurityContextHolder;
 import po.User;
 import service.UserService;
 
@@ -36,9 +38,7 @@ public class UserAction extends DefaultActionSupport {
                 return INPUT;
             }
             ActionContext context = ActionContext.getContext();
-            Map session = context.getSession();
-
-
+            context.getSession().put("username", username);
 
             return SUCCESS;
         }
@@ -60,8 +60,12 @@ public class UserAction extends DefaultActionSupport {
             }
 
             user = new User(username, password.hashCode(), phone);
-
             mService.addUser(user);
+            ActionContext context = ActionContext.getContext();
+            context.getSession().put("username", username);
+
+
+            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return SUCCESS;
 
         }

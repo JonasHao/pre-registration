@@ -1,26 +1,39 @@
 package po;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-/**
- * Created by Koche on 2016/4/27.
- */
+
 @Entity
 public class Contact {
+    private long id;
     private String name;
     private String idNo;
     private String phone;
+    private boolean isDefault;
 
-    private long ownerId;
+    private User owner;
 
-    @Id
-    public long getOwnerId() {
-        return ownerId;
+    public Contact() {
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    @Id
+    @GeneratedValue
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userID", nullable = false)
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getName() {
@@ -31,7 +44,6 @@ public class Contact {
         this.name = name;
     }
 
-    @Id
     public String getIdNo() {
         return idNo;
     }
@@ -46,5 +58,18 @@ public class Contact {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -12,16 +12,43 @@ import java.util.List;
  */
 public class HospitalAction extends DefaultActionSupport {
     private List<Hospital> hospitals;
+    private long hospitalID;
+    private Hospital hospital;
     private HospitalDao mHospitalDao;
 
 
-    public String execute() throws Exception {
+    /***
+     * 根据条件查询医院列表, 默认查询所有医院，截取前10条记录
+     * @return 医院的列表
+     * @throws Exception
+     */
+    public String query() throws Exception {
         hospitals = mHospitalDao.all();
         return SUCCESS;
     }
 
+    public String get() throws Exception{
+        hospital = mHospitalDao.get(hospitalID);
+        if(hospital!=null) {
+            return SUCCESS;
+        }
+        return ERROR;
+    }
+
     public List<Hospital> getHospitals() {
         return hospitals;
+    }
+
+    public void setHospitalID(long hospitalID) {
+        this.hospitalID = hospitalID;
+    }
+
+    public long getHospitalID() {
+        return hospitalID;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
     }
 
     public void setHospitals(List<Hospital> hospitals) {
@@ -31,4 +58,6 @@ public class HospitalAction extends DefaultActionSupport {
     public void setHospitalDao(HospitalDao hospitalDao) {
         mHospitalDao = hospitalDao;
     }
+
+
 }

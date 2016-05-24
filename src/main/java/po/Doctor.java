@@ -1,17 +1,26 @@
 package po;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Koche on 2016/5/10.
- */
+@Entity
 public class Doctor {
     private long ID;
     private String name;
-    private Department department;
-    private Hospital hospital;
-    private Map<Long,Integer> leftCapacity;
+    private String introduction;
+    private String title;
 
+    private Department department;
+    private List<Capacity> capacities = new ArrayList<>(10);
+    private List<Order> orders = new ArrayList<>(10);
+
+    public Doctor() {
+    }
+
+    @Id
+    @GeneratedValue
     public long getID() {
         return ID;
     }
@@ -28,10 +37,24 @@ public class Doctor {
         this.name = name;
     }
 
-    public Map<Long, Integer> getLeftCapacity() {
-        return leftCapacity;
+    public String getIntroduction() {
+        return introduction;
     }
 
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "departmentID", nullable = false)
     public Department getDepartment() {
         return department;
     }
@@ -40,15 +63,21 @@ public class Doctor {
         this.department = department;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
+    public List<Capacity> getCapacities() {
+        return capacities;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setCapacities(List<Capacity> capacities) {
+        this.capacities = capacities;
     }
 
-    public void setLeftCapacity(Map<Long, Integer> leftCapacity) {
-        this.leftCapacity = leftCapacity;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

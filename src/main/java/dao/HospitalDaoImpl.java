@@ -25,6 +25,13 @@ public class HospitalDaoImpl implements HospitalDao {
         return hospitals;
     }
 
+    @Override
+    public Hospital get(long id) {
+        Session session = mSessionFactory.getCurrentSession();
+        session.beginTransaction();
+        return session.get(Hospital.class, id);
+    }
+
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         mSessionFactory = sessionFactory;

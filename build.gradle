@@ -39,14 +39,19 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework:spring-orm')
+    compile 'org.springframework.security:spring-security-web:4.1.0.RELEASE'
 
     // compile java ee 7
     compile('javax:javaee-api:7.0')
 
     // struts
-    compile('org.apache.struts:struts2-core:2.3.28')
+    compile('org.apache.struts:struts2-core:2.3.28'){
+        exclude module:'javassist'
+    }
     compile('org.apache.struts:struts2-spring-plugin:2.3.28')
     compile('org.apache.struts:struts2-convention-plugin:2.3.28')
+    compile('org.apache.struts:struts2-json-plugin:2.5')
+
 
     // hibernate
     compile ('org.hibernate:hibernate-core:5.1.0.Final')

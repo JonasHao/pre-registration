@@ -1,12 +1,15 @@
 package action;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import po.*;
+import service.CapacityService;
+import service.ContactService;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
-import po.Doctor;
-import po.Registration;
 import service.*;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Koche on 2016/4/27.
@@ -15,35 +18,73 @@ import java.util.Date;
 public class RegistrationAction extends DefaultActionSupport {
     private long contactID;
     private long doctorID;
+    private long capacityID;
     private Date createDate;
-    private Calendar reserveDate;
+
+    private Capacity capacity;
+    private Contact contact;
+    private List<Contact> contacts;
+
+    private String doctorName;
+    private String department;
+    private String hospital;
+    private String slot;
 
     private DoctorService mDoctorService;
-    private CapacityService mCapacityService;
     private RegistrationService mRegistrationService;
     private UserService mUserService;
+    private CapacityService capacityService;
 
 
-    public String register() throws Exception {
-        // 首先查询选中医生在选中时间段的挂号余量
-        int leftCapacity = mCapacityService.
-                queryCapacityByDateAndDoctorID(reserveDate, doctorID);
+    public String fillOrder() throws Exception {
+        Doctor doctor = mDoctorService.get(doctorID);
+        doctorName = doctor.getName();
+        department = doctor.getDepartment().getName();
+        hospital = doctor.getDepartment().getHospital().getName();
 
-        if (leftCapacity > 0) {
-            // 获取订单的医院方信息
-            Doctor doctor = mDoctorService.findDoctorByID(doctorID);
-            String doctorName = doctor.getName();
-            String hospital = doctor.getHospital().getName();
-            String department = doctor.getDepartment().getName();
+        capacity = capacityService.get(capacityID);
+        if (capacity == null) {
+            return "out";
+        }
+
+        slot = capacity.getSlotString();
+
+        String userID = mUserService.getCurrentUserID();
+
+        if (userID == null) {
+            return INPUT;
+        }
+
+        contacts = mUserService.findUserByID(userID).getContacts();
+        if (contacts.size() > 0) {
+            for (Contact c : contacts) {
+                if (c.isDefault()) {
+                    contact = c;
+                    break;
+                }
+            }
+            if (contact == null) {
+                contact = contacts.get(0);
+            }
+        }
+
+        return SUCCESS;
+    }
 
 
-            // 获取当前登录的用户的用户ID
-            String userID = mUserService.getCurrentUser().getID();
+    /**
+     * 需要的参数：capacityID, contactID
+     *
+     * @return "out"表示用户过期，需重新登陆。
+     * @throws Exception
+     */
+    public String order() throws Exception {
+        String userID = mUserService.getCurrentUserID();
+        if (userID == null) {
+            return "out";
+        }
 
-            Registration registration = new Registration(userID, createDate, reserveDate,
-                    hospital, department, doctorName);
-
-            mRegistrationService.create(registration);
+        if (mRegistrationService.create(userID, capacityID, contactID)) {
             return SUCCESS;
         }
 
@@ -72,6 +113,14 @@ public class RegistrationAction extends DefaultActionSupport {
         this.doctorID = doctorID;
     }
 
+    public long getCapacityID() {
+        return capacityID;
+    }
+
+    public void setCapacityID(long capacityID) {
+        this.capacityID = capacityID;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
@@ -81,14 +130,64 @@ public class RegistrationAction extends DefaultActionSupport {
     }
 
 
+    public String getDoctorName() {
+        return doctorName;
+    }
 
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
+
+    public Capacity getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Capacity capacity) {
+        this.capacity = capacity;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public String getSlot() {
+        return slot;
+    }
+
+    public void setSlot(String slot) {
+        this.slot = slot;
+    }
 
     public void setDoctorService(DoctorService DoctorService) {
         mDoctorService = DoctorService;
-    }
-
-    public void setCapacityService(CapacityService capacityService) {
-        mCapacityService = capacityService;
     }
 
     public void setUserService(UserService userService) {
@@ -98,4 +197,10 @@ public class RegistrationAction extends DefaultActionSupport {
     public void setRegistrationService(RegistrationService registrationService) {
         mRegistrationService = registrationService;
     }
+
+
+    public void setCapacityService(CapacityService capacityService) {
+        this.capacityService = capacityService;
+    }
+
 }

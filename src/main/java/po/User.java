@@ -2,6 +2,7 @@ package po;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -9,6 +10,9 @@ public class User {
     private String phone;
     private String email;
     private long password;
+
+    private List<Contact> contacts;
+    private List<Order> orders;
 
 
     public User(String ID, long password, String phone) {
@@ -51,6 +55,25 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner" )
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

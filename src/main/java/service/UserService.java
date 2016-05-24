@@ -12,5 +12,5 @@ public interface UserService {
 
     List<User> listAll();
 
-    User getCurrentUser();
+    String getCurrentUserID();
 }

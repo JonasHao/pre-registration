@@ -2,10 +2,10 @@ package action;
 
 import dao.DepartmentDao;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 import po.Department;
-
-import java.util.List;
 
 
 /**
@@ -13,34 +13,34 @@ import java.util.List;
  * 科室相关的Action
  */
 public class DepartmentAction extends DefaultActionSupport {
-    private long hospitalID;
-    private List<Department> departments;
+    private long id;
+    private Department department;
     private DepartmentDao mDepartmentDao;
 
-    public String queryDepartments() throws Exception {
-        if (hospitalID >= 0) {
-            departments = mDepartmentDao.getAllOfHospital(hospitalID);
+
+    public String get() throws Exception {
+        department = mDepartmentDao.get(id);
+        if (department != null) {
             return SUCCESS;
-        } else {
-            return ERROR;
         }
+        return ERROR;
     }
 
 
-    public long getHospitalID() {
-        return hospitalID;
+    public long getId() {
+        return id;
     }
 
-    public void setHospitalID(long hospitalID) {
-        this.hospitalID = hospitalID;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public List<Department> getDepartments() {
-        return departments;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public void setDepartmentDao(DepartmentDao departmentDao) {

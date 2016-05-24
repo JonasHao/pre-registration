@@ -1,9 +1,11 @@
 package service;
 
+import com.opensymphony.xwork2.ActionContext;
 import dao.UserDao;
 import po.User;
 
 import java.util.List;
+import java.util.Map;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
@@ -29,7 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getCurrentUser() {
-        return null;
+    public String getCurrentUserID() {
+        ActionContext context = ActionContext.getContext();
+        Map session = context.getSession();
+        return (String)session.get("username");
     }
 }

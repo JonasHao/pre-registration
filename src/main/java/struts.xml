@@ -6,37 +6,56 @@
 
 <struts>
     <package name="default" namespace="/" extends="struts-default">
-
         <action name="login" class="action.UserAction" method="login">
             <result name="input">login.jsp</result>
             <result name="error">error.jsp</result>
             <result name="success" type="redirectAction">
-                <param name="actionName">displayHospitals</param>
+                <param name="actionName">hospitals</param>
             </result>
         </action>
 
         <action name="signUp" class="action.UserAction" method="singUp">
             <result name="input">signUp.jsp</result>
             <result name="success" type="redirectAction">
-                <param name="actionName">displayHospitals</param>
+                <param name="actionName">hospitals</param>
             </result>
         </action>
 
-        <action name="displayHospitals" class="action.HospitalAction">
+        <action name="hospitals" class="action.HospitalAction" method="query">
             <result name="success">hospitals.jsp</result>
         </action>
 
-        <action name="displayDepartments" class="action.DepartmentAction" method="queryDepartments">
-            <result name="success">departments.jsp</result>
+        <action name="hospital" class="action.HospitalAction" method="get">
+            <result name="success">hospital.jsp</result>
+            <result name="error">error.jsp</result>
         </action>
 
-        <action name="register" class="action.RegistrationAction" method="register">
+        <action name="department" class="action.DepartmentAction" method="get">
+            <result>department.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="doctor" class="action.DoctorAction" method="get">
+            <result>doctor.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="fill" class="action.RegistrationAction" method="fillOrder">
+            <result name="success">fill.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="out">doctor.jsp</result>
+        </action>
+
+        <action name="order" class="action.RegistrationAction" method="order">
             <result name="success">welcome.jsp</result>
+            <result name="out">login.jsp</result>
         </action>
 
         <action name="unRegister" class="action.RegistrationAction" method="unRegister">
             <result name="success">welcome.jsp</result>
         </action>
+
+
 
 
     </package>

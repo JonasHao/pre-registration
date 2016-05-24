@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>注册</title>
+
 </head>
 <body>
 
@@ -12,8 +13,8 @@
     <s:password name="passwordAgain" label="确认密码" maxLength="16" required="true"/>
     <s:textfield name="phone" label="电话" maxLength="15" required="true"/>
     <s:textfield name="email" label="电子邮箱"/>
-
     <s:submit value="注册"/>
 </s:form>
+
 </body>
 </html>
