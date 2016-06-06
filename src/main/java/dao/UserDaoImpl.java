@@ -9,23 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends BaseDao<User> {
 
     private SessionFactory sessionFactory;
 
 
-    @Override
-    public String addUser(User user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(user);
-        transaction.commit();
-        session.flush();
-        session.close();
-        return "ok";
-    }
 
-    @Override
     public User findUserByID(String ID) {
         sessionFactory.getCurrentSession().beginTransaction();
 
@@ -42,7 +31,6 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    @Override
     public List<User> listAll() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

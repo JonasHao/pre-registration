@@ -63,6 +63,12 @@
     <bean class="service.ContactServiceImpl" id="contactService">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean class="controller.HospitalController" id="hospitalController">
+        <property name="hospitalDao" ref="hospitalDao"/>
+    </bean>
+    <bean class="dao.BaseDao" id="baseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 
 </beans>

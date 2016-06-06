@@ -29,8 +29,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return null;
     }
 
-
-
     public void setSessionFactory(SessionFactory sessionFactory) {
         mSessionFactory = sessionFactory;
     }

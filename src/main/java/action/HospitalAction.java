@@ -13,6 +13,7 @@ import java.util.List;
 public class HospitalAction extends DefaultActionSupport {
     private List<Hospital> hospitals;
     private long hospitalID;
+
     private Hospital hospital;
     private HospitalDao mHospitalDao;
 

@@ -10,7 +10,7 @@ import service.UserService;
 import java.util.Map;
 
 
-public class UserAction extends DefaultActionSupport {
+public class UserAction extends BaseAction{
 
     /* 登陆 */
     private String username;
