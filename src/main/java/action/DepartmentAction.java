@@ -1,9 +1,7 @@
 package action;
 
-import dao.DepartmentDao;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
+
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 import po.Department;
 
@@ -15,15 +13,10 @@ import po.Department;
 public class DepartmentAction extends DefaultActionSupport {
     private long id;
     private Department department;
-    private DepartmentDao mDepartmentDao;
 
 
     public String get() throws Exception {
-        department = mDepartmentDao.get(id);
-        if (department != null) {
-            return SUCCESS;
-        }
-        return ERROR;
+        return SUCCESS;
     }
 
 
@@ -43,7 +36,4 @@ public class DepartmentAction extends DefaultActionSupport {
         this.department = department;
     }
 
-    public void setDepartmentDao(DepartmentDao departmentDao) {
-        mDepartmentDao = departmentDao;
-    }
 }

@@ -6,12 +6,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Koche on 2016/6/6.
+ * Base Action for RESTFUL services.
+ * Provide a json response formed as:
+ * <code>
+ * {
+ * "result":"success",
+ * "data":{
+ * "key":"value"
+ * }
+ * }
+ * </code>
  */
 public class BaseAction extends DefaultActionSupport {
-    private String result = SUCCESS;
+    protected String result = SUCCESS;
 
     private Map<String, Object> data = new HashMap<>();
+
+    public void addFieldError(String fieldName, String errorMessage, String code) {
+        super.addFieldError(fieldName, errorMessage);
+        if (!data.containsKey("error_code")) {
+            data.put("error_code", code);
+        }
+    }
+
+    public void addData(String key, Object value) {
+        data.put(key, value);
+    }
 
     public String getResult() {
         return result;
@@ -22,7 +42,10 @@ public class BaseAction extends DefaultActionSupport {
     }
 
     public Map<String, Object> getData() {
-        return data;
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", result);
+        map.put("data", data);
+        return map;
     }
 
     public void setData(Map<String, Object> data) {

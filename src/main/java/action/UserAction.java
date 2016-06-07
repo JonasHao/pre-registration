@@ -1,8 +1,6 @@
 package action;
 
 import com.opensymphony.xwork2.ActionContext;
-import org.apache.struts2.dispatcher.DefaultActionSupport;
-import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import po.User;
 import service.UserService;
@@ -10,7 +8,7 @@ import service.UserService;
 import java.util.Map;
 
 
-public class UserAction extends BaseAction{
+public class UserAction extends BaseAction {
 
     /* 登陆 */
     private String username;
@@ -20,56 +18,59 @@ public class UserAction extends BaseAction{
     private String phone;
     private String email;
 
-    private UserService mService;
+    private UserService userService;
 
     UserAction() {
     }
 
     public String login() throws Exception {
-        if (validateUsername()) {
-            User user = mService.findUserByID(username);
-            if (user == null) {
-                addFieldError("username", "这个用户名尚未注册");
-                return INPUT;
-            }
-
-            if (password.hashCode() != user.getPassword()) {
-                addFieldError("password", "密码错误");
-                return INPUT;
-            }
-            ActionContext context = ActionContext.getContext();
-            context.getSession().put("username", username);
-
-            return SUCCESS;
+        if (!validateUsername()) {
+            return result = INPUT;
         }
 
-        return INPUT;
+        User user = userService.findUserByID(username);
+        if (user == null) {
+            addFieldError("username", "这个用户名尚未注册","003");
+            return result = INPUT;
+        }
+
+        if (password.hashCode() != user.getPassword()) {
+            addFieldError("password", "密码错误","004");
+            return result = INPUT;
+        }
+
+        ActionContext context = ActionContext.getContext();
+        context.getSession().put("username", username);
+        addData("token", userService.generateToken(user));
+
+        return result = SUCCESS;
     }
 
     public String singUp() throws Exception {
-        if (validateUsername() && validatePassword()) {
+        if (!validateUsername() && validatePassword()) {
+            return result = INPUT;
+        }
 
-            if (!password.equals(passwordAgain)) {
-                addFieldError("passwordAgain", "两次密码输入不一致");
-            }
+        if (!password.equals(passwordAgain)) {
+            addFieldError("passwordAgain", "两次密码输入不一致");
+            return result = INPUT;
+        }
 
-            User user = mService.findUserByID(username);
-            if (user != null) {
-                addFieldError("username", "用户名已经被占用");
-                return INPUT;
-            }
+        User user = userService.findUserByID(username);
+        if (user != null) {
+            addFieldError("username", "用户名已经被占用");
+            return result = INPUT;
+        }
 
-            user = new User(username, password.hashCode(), phone);
-            mService.addUser(user);
+        user = new User(username, password.hashCode(), phone);
+        if (userService.addUser(user)) {
             ActionContext context = ActionContext.getContext();
             context.getSession().put("username", username);
-
-
             SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return SUCCESS;
-
+            return result = SUCCESS;
         }
-        return INPUT;
+
+        return result = INPUT;
     }
 
 
@@ -80,7 +81,7 @@ public class UserAction extends BaseAction{
         if (username != null && username.matches("^[a-z0-9_-]{3,15}$")) {
             return true;
         }
-        addFieldError("username", "用户名不符合规范");
+        addFieldError("username", "用户名不符合规范","001");
         return false;
     }
 
@@ -91,7 +92,7 @@ public class UserAction extends BaseAction{
         if (!password.isEmpty() && password.matches("[0-9a-zA-Z!@#$%^?,./]{6,20}")) {
             return true;
         }
-        addFieldError("password", "密码不符合规范");
+        addFieldError("password", "密码不符合规范","002");
         return false;
     }
 
@@ -136,8 +137,18 @@ public class UserAction extends BaseAction{
         this.email = email;
     }
 
+    @Override
+    public String getResult() {
+        return super.getResult();
+    }
+
+    @Override
+    public Map<String, Object> getData() {
+        return super.getData();
+    }
+
     public void setUserService(UserService userService) {
-        mService = userService;
+        this.userService = userService;
     }
 
 

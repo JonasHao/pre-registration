@@ -17,33 +17,50 @@
 
     <package name="default" namespace="/" extends="json-default">
         <action name="login" class="action.UserAction" method="login">
-            <result name="input">login.jsp</result>
+            <result name="input" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
             <result name="error">error.jsp</result>
-            <result name="success" type="redirectAction">
-                <param name="actionName">hospitals</param>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
             </result>
         </action>
 
         <action name="signUp" class="action.UserAction" method="singUp">
             <result name="input">signUp.jsp</result>
-            <result name="success" type="redirectAction">
-                <param name="actionName">hospitals</param>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
             </result>
         </action>
 
         <action name="hospitals" class="action.HospitalAction" method="query">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="includeProperties">
-                    hospitals\[\d+\]\.ID,
-                    hospitals\[\d+\]\.name,
-                    hospitals\[\d+\]\.description,
+                <param name="root">
+                    data
+                </param>
+                <param name="excludeProperties">
+                    data.department[
                 </param>
             </result>
         </action>
 
         <action name="hospital" class="action.HospitalAction" method="get">
-            <result name="success">hospital.jsp</result>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
             <result name="error">error.jsp</result>
         </action>
 

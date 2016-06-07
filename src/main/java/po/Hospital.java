@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 public class Hospital {
-    private long ID;
+    private long id;
     private String name;
     private String description;
     private Set<Department> departments = new HashSet<>(10);
@@ -23,12 +23,12 @@ public class Hospital {
 
     @Id
     @GeneratedValue
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setId(long ID) {
+        this.id = ID;
     }
 
     public String getName() {

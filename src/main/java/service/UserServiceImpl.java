@@ -1,39 +1,44 @@
 package service;
 
 import com.opensymphony.xwork2.ActionContext;
-import dao.UserDao;
+import dao.BaseDao;
+import org.hibernate.HibernateException;
 import po.User;
-
-import java.util.List;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
+    private BaseDao userDao;
 
     @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public boolean addUser(User user) {
+        try {
+            userDao.save(user);
+            return true;
+        }catch (HibernateException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public User findUserByID(String name) {
-        return userDao.findUserByID(name);
+        return userDao.get(User.class, name);
     }
 
-    @Override
-    public List<User> listAll() {
-        return userDao.listAll();
-    }
 
     @Override
     public String getCurrentUserID() {
         ActionContext context = ActionContext.getContext();
         Map session = context.getSession();
-        return (String)session.get("username");
+        return (String) session.get("username");
+    }
+
+    @Override
+    public String generateToken(User user) {
+        return "fake token";
+    }
+
+    public void setBaseDao(BaseDao baseDao) {
+        this.userDao = baseDao;
     }
 }

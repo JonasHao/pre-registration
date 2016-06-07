@@ -1,8 +1,6 @@
 package dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,38 +9,44 @@ import java.util.List;
  * Created by Koche on 2016/6/6.
  * encapsulate C(save) R(get) U(update) D(delete) operations
  */
-public class BaseDao<T> {
-    private SessionFactory sessionFactory;
+public class BaseDao {
+    protected SessionFactory sessionFactory;
 
-    public void save(T t) throws HibernateException {
+    public void save(Object o) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.save(t);
+        session.save(o);
     }
 
-    public void save(List<T> ts) throws HibernateException {
+    public void save(List<Object> ts) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         ts.forEach(session::save);
     }
 
-    public T get(Class<T> entityType, Serializable id) throws HibernateException {
+    public <T> T get(Class<T> entityType, Serializable id) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         return session.get(entityType, id);
     }
 
-    public T update(T t) throws HibernateException {
+    public Query query(String queryString) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.update(t);
-        return t;
+        return session.createQuery(queryString);
     }
 
-    public void delete(T t) throws HibernateException {
+    public Object update(Object o) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.delete(t);
+        session.update(o);
+        return o;
+    }
+
+    public void delete(Object o) throws HibernateException {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(o);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

@@ -8,12 +8,9 @@
         <property name="configLocations" value="classpath:hibernate.cfg.xml"/>
     </bean>
 
-    <bean id="userDao" class="dao.UserDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
     <bean id="userService" class="service.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
+        <property name="baseDao" ref="baseDao"/>
     </bean>
 
     <bean id="userAction" class="action.UserAction">
@@ -45,17 +42,14 @@
         <property name="capacityService" ref="capacityService"/>
     </bean>
 
-    <bean class="dao.HospitalDaoImpl" id="hospitalDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <bean class="service.HospitalService" id="hospitalDao">
+        <property name="dao" ref="baseDao"/>
     </bean>
     <bean class="action.HospitalAction" id="displayAction">
         <property name="hospitalDao" ref="hospitalDao"/>
     </bean>
-    <bean class="dao.DepartmentDaoImpl" id="departmentDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+
     <bean class="action.DepartmentAction" id="departmentAction">
-        <property name="departmentDao" ref="departmentDao"/>
     </bean>
     <bean class="action.DoctorAction" id="doctorAction">
         <property name="doctorService" ref="doctorService"/>
@@ -63,9 +57,7 @@
     <bean class="service.ContactServiceImpl" id="contactService">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <bean class="controller.HospitalController" id="hospitalController">
-        <property name="hospitalDao" ref="hospitalDao"/>
-    </bean>
+
     <bean class="dao.BaseDao" id="baseDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

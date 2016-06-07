@@ -6,11 +6,11 @@ import java.util.List;
 
 
 public interface UserService {
-    void addUser(User user);
+    boolean addUser(User user);
 
     User findUserByID(String name);
 
-    List<User> listAll();
-
     String getCurrentUserID();
+
+    String generateToken(User user);
 }
