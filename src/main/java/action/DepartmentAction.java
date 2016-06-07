@@ -19,7 +19,6 @@ public class DepartmentAction extends DefaultActionSupport {
         return SUCCESS;
     }
 
-
     public long getId() {
         return id;
     }

@@ -64,3 +64,29 @@ CREATE TABLE `capacity` (
 
 
 
+CREATE TABLE `registrations` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reserveDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `contactName` varchar(64) NOT NULL,
+  `contactIDNo` varchar(32) NOT NULL,
+  `contactPhone` varchar(32) NOT NULL,
+  `orderStatus` int(11) DEFAULT '0',
+  `userID` varchar(255) NOT NULL,
+  `doctorID` bigint(20) NOT NULL,
+  `departmentID` bigint(20) DEFAULT NULL,
+  `hospitalID` bigint(20) DEFAULT NULL,
+  `doctorName` varchar(255) NOT NULL,
+  `departmentName` varchar(255) NOT NULL,
+  `hospitalName` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKbw2c2qlj6pfb69iqh8y93q5lm` (`departmentID`),
+  KEY `FKjbciw4mfn0ubhk9jyqrmf91f5` (`doctorID`),
+  KEY `FK8o0oxw4ls6iy5esyyrdwtx4nf` (`hospitalID`),
+  KEY `FKrcqd34f33hl10brjw1ju15qta` (`userID`),
+  CONSTRAINT `FK8o0oxw4ls6iy5esyyrdwtx4nf` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`ID`),
+  CONSTRAINT `FKbw2c2qlj6pfb69iqh8y93q5lm` FOREIGN KEY (`departmentID`) REFERENCES `department` (`ID`),
+  CONSTRAINT `FKjbciw4mfn0ubhk9jyqrmf91f5` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`ID`),
+  CONSTRAINT `FKrcqd34f33hl10brjw1ju15qta` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
+  CONSTRAINT `order_user_id_fk` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8
