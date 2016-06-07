@@ -48,9 +48,6 @@
                 <param name="root">
                     data
                 </param>
-                <param name="excludeProperties">
-                    data.department[
-                </param>
             </result>
         </action>
 
