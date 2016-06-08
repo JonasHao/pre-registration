@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="configLocations" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+
+    <bean id="userService" class="service.UserServiceImpl">
+        <property name="baseDao" ref="baseDao"/>
+    </bean>
+
+    <bean id="userAction" class="action.UserAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+
+    <bean id="doctorService" class="service.DoctorServiceImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="registrationService" class="service.RegistrationServiceImpl">
+        <property name="capacityService" ref="capacityService"/>
+        <property name="contactService" ref="contactService"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="capacityService" class="service.CapacityServiceImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="registrationAction" class="action.RegistrationAction">
+        <property name="doctorService" ref="doctorService"/>
+        <property name="userService" ref="userService"/>
+        <property name="registrationService" ref="registrationService"/>
+        <property name="capacityService" ref="capacityService"/>
+    </bean>
+
+    <bean class="service.HospitalService" id="hospitalDao">
+        <property name="dao" ref="baseDao"/>
+    </bean>
+    <bean class="action.HospitalAction" id="displayAction">
+        <property name="hospitalDao" ref="hospitalDao"/>
+    </bean>
+
+    <bean class="action.DepartmentAction" id="departmentAction">
+    </bean>
+    <bean class="action.DoctorAction" id="doctorAction">
+        <property name="doctorService" ref="doctorService"/>
+    </bean>
+    <bean class="service.ContactServiceImpl" id="contactService">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean class="dao.BaseDao" id="baseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+</beans>

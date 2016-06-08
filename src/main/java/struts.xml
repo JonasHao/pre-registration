@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="xhtml,,xml,json,action"/>
+
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper"/>
+    <constant name="struts.mapper.prefixMapping" value="/rest:rest,:struts"/>
+
+    <constant name="struts.convention.action.suffix" value="Controller"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="rest-default"/>
+    <constant name="struts.convention.package.locators" value="example"/>
+
+    <package name="default" namespace="/" extends="json-default">
+        <action name="login" class="action.UserAction" method="login">
+            <result name="input" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="signUp" class="action.UserAction" method="singUp">
+            <result name="input">signUp.jsp</result>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="addHospital" class="action.HospitalAction" method="addHospital">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+
+            </result>
+        </action>
+
+        <action name="deleteHospital" class="action.HospitalAction" method="deleteHospital">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+
+            </result>
+        </action>
+
+        <action name="updateHospital" class="action.HospitalAction" method="updateHospital">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+
+            </result>
+        </action>
+
+        <action name="hospitals" class="action.HospitalAction" method="query">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+                <param name="excludeProperties">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="getHospitalByID" class="action.HospitalAction" method="getHospitalByID">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getHospitalByAddress" class="action.HospitalAction" method="getHospitalByAddress">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="department" class="action.DepartmentAction" method="get">
+            <result>department.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="doctor" class="action.DoctorAction" method="get">
+            <result>doctor.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="fill" class="action.RegistrationAction" method="fillOrder">
+            <result name="success">fill.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="out">doctor.jsp</result>
+        </action>
+
+        <action name="order" class="action.RegistrationAction" method="order">
+            <result name="success">welcome.jsp</result>
+            <result name="out">login.jsp</result>
+        </action>
+
+        <action name="unRegister" class="action.RegistrationAction" method="unRegister">
+            <result name="success">welcome.jsp</result>
+        </action>
+
+
+    </package>
+
+</struts>
