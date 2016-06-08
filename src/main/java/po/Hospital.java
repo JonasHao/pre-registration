@@ -17,6 +17,15 @@ public class Hospital {
     private String description;
     private Set<Department> departments = new HashSet<>(10);
     private List<Order> orders = new ArrayList<>(10);
+    private List<Privilege>  privilege;
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy ="hospital")
+    public List<Privilege> getPrivilege() {
+        return privilege;
+    }
+    public void setPrivilege(List<Privilege> privilege) {
+        this.privilege = privilege;
+    }
 
     public Hospital() {
     }

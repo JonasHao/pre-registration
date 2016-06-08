@@ -3,7 +3,9 @@ package service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import po.Doctor;
+import po.Privilege;
 
+import javax.persistence.OneToOne;
 import java.util.List;
 
 /**

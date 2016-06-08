@@ -1,10 +1,7 @@
 package action;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import po.*;
 import service.CapacityService;
-import service.ContactService;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 import service.*;
 
@@ -25,6 +22,10 @@ public class RegistrationAction extends DefaultActionSupport {
     private Contact contact;
     private List<Contact> contacts;
 
+    public void setPrivilegeService(PrivilegeService privilegeService) {
+        this.privilegeService = privilegeService;
+    }
+
     private String doctorName;
     private String department;
     private String hospital;
@@ -33,6 +34,7 @@ public class RegistrationAction extends DefaultActionSupport {
     private DoctorService mDoctorService;
     private RegistrationService mRegistrationService;
     private UserService mUserService;
+    private PrivilegeService privilegeService;
     private CapacityService capacityService;
 
 
@@ -49,13 +51,13 @@ public class RegistrationAction extends DefaultActionSupport {
 
         slot = capacity.getSlotString();
 
-        String userID = mUserService.getCurrentUserID();
+        String userID =privilegeService.getCurrentUserID();
 
         if (userID == null) {
             return INPUT;
         }
 
-        contacts = mUserService.findUserByID(userID).getContacts();
+        contacts = mUserService.get(userID).getContacts();
         if (contacts.size() > 0) {
             for (Contact c : contacts) {
                 if (c.isDefault()) {
@@ -79,7 +81,7 @@ public class RegistrationAction extends DefaultActionSupport {
      * @throws Exception
      */
     public String order() throws Exception {
-        String userID = mUserService.getCurrentUserID();
+        String userID = privilegeService.getCurrentUserID();
         if (userID == null) {
             return "out";
         }

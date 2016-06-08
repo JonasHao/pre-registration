@@ -10,12 +10,21 @@ public class User {
     private String phone;
     private String email;
     private long password;
+    private Privilege privilege;
 
     private List<Contact> contacts;
     private List<Order> orders;
 
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
+    }
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "user")
+    public Privilege getPrivilege() {
+        return privilege;
+    }
 
     public User(String ID, long password, String phone) {
+
         this.ID = ID;
         this.password = password;
         this.phone = phone;

@@ -10,28 +10,15 @@ public class UserServiceImpl implements UserService {
     private BaseDao userDao;
 
     @Override
-    public boolean addUser(User user) {
-        try {
-            userDao.save(user);
-            return true;
-        }catch (HibernateException e){
-            e.printStackTrace();
-            return false;
-        }
+    public void addUser(User user) {
+        userDao.save(user);
     }
 
     @Override
-    public User findUserByID(String name) {
+    public User get(String name) {
         return userDao.get(User.class, name);
     }
 
-
-    @Override
-    public String getCurrentUserID() {
-        ActionContext context = ActionContext.getContext();
-        Map session = context.getSession();
-        return (String) session.get("username");
-    }
 
     @Override
     public String generateToken(User user) {
