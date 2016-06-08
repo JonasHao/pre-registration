@@ -1,4 +1,12 @@
 html,body,div,ul,li,a,span,p,img,canvas{padding: 0;margin: 0;font-family: "Microsoft Yahei";font-size: 100%;}
-body,html{width: 100%;height: 100%;overflow-x: hidden;overflow-y: hidden;}
+body,html{width: 100%;height: 100%;}
+
 a{text-decoration: none;}
+a:hover{text-decoration: none;}
 .clear{clear: both;}
+
+.panel .panel-body a{display: block; width: 33%;text-align: center;padding: 30px 20px;float: left;}
+.panel .panel-body a img{width: 150px; height: 150px;}
+.panel .panel-body a p.name{color: black;padding: 8px 0px;}
+.panel .panel-body a p.detail{display: block;height: 14px;color: #ccc;font-size: 12px;overflow: hidden;}
+
