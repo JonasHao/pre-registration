@@ -15,7 +15,11 @@ public class DepartmentAction extends DefaultActionSupport {
     private Department department;
 
 
+
+
+    //
     public String get() throws Exception {
+
         return SUCCESS;
     }
 

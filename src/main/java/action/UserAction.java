@@ -1,7 +1,6 @@
 package action;
 
 import com.opensymphony.xwork2.ActionContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import po.User;
 import service.UserService;
 
@@ -66,7 +65,6 @@ public class UserAction extends BaseAction {
         if (userService.addUser(user)) {
             ActionContext context = ActionContext.getContext();
             context.getSession().put("username", username);
-            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return result = SUCCESS;
         }
 
