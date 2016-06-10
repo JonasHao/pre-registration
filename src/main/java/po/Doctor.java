@@ -3,14 +3,14 @@ package po;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Doctor {
-    private long ID;
+    private long id;
     private String name;
     private String introduction;
     private String title;
+    private String image;
 
     private Department department;
     private List<Capacity> capacities = new ArrayList<>(10);
@@ -21,12 +21,12 @@ public class Doctor {
 
     @Id
     @GeneratedValue
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setId(long ID) {
+        this.id = ID;
     }
 
     public String getName() {
@@ -51,6 +51,14 @@ public class Doctor {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)

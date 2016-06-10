@@ -19,6 +19,7 @@ public class Hospital {
     private String address_city;
     private String address_area;
     private String address_detail;
+    private String image;
     private Set<Department> departments = new HashSet<>(10);
     private List<Order> orders = new ArrayList<>(10);
 
@@ -81,6 +82,14 @@ public class Hospital {
 
     public void setAddress_area(String address_area) {
         this.address_area = address_area;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String img) {
+        this.image = img;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hospital")

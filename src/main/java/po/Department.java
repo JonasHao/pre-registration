@@ -13,6 +13,7 @@ public class Department {
     private long id;
     private String name;
     private String description;
+    private String image;
 
     private Hospital hospital;
     private List<Doctor> doctors = new ArrayList<>(10);
@@ -55,6 +56,14 @@ public class Department {
         this.description = type;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hospitalID", nullable = false)
     public Hospital getHospital() {
@@ -78,6 +87,8 @@ public class Department {
     public List<Order> getOrders() {
         return orders;
     }
+
+
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;

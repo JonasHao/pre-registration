@@ -15,7 +15,7 @@ public class ContactServiceImpl implements ContactService {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         @SuppressWarnings("unchecked")
-        List<Contact> contacts = session.createQuery("from Contact where owner.ID=? and idNo=?")
+        List<Contact> contacts = session.createQuery("from Contact where owner.id=? and idNo=?")
                 .setParameter(0, userID).setParameter(1, IDNo).list();
         if (contacts.size() == 1) {
             return contacts.get(0);
@@ -35,7 +35,7 @@ public class ContactServiceImpl implements ContactService {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         @SuppressWarnings("unchecked")
-        List<Contact> contacts = session.createQuery("from Contact where owner.ID=?")
+        List<Contact> contacts = session.createQuery("from Contact where owner.id=?")
                 .setParameter(0, userID).list();
         return contacts;
     }

@@ -81,3 +81,6 @@ gradle-app.setting
 /.idea/modules.xml
 /.idea/encodings.xml
 /.idea/copyright/profiles_settings.xml
+.idea/copyright/
+src/main/web/META-INF/
+src/test/resources/

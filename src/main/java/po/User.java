@@ -6,17 +6,19 @@ import java.util.List;
 
 @Entity
 public class User {
-    private String ID;
+    private String id;
     private String phone;
     private String email;
     private long password;
+    private String image;
+
     private Privilege privilege;
 
     private List<Contact> contacts;
     private List<Order> orders;
 
-    public User(String ID, long password, String phone) {
-        this.ID = ID;
+    public User(String id, long password, String phone) {
+        this.id = id;
         this.password = password;
         this.phone = phone;
         this.privilege = new Privilege();
@@ -27,12 +29,12 @@ public class User {
     }
 
     @Id
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String name) {
-        this.ID = name;
+    public void setId(String name) {
+        this.id = name;
     }
 
     public long getPassword() {
@@ -87,8 +89,16 @@ public class User {
         this.privilege = privilege;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return ID;
+        return id;
     }
 }

@@ -2,7 +2,6 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import org.hibernate.HibernateException;
-import po.Privilege;
 import po.User;
 import service.UserService;
 
@@ -72,10 +71,11 @@ public class UserAction extends BaseAction {
             return result = SUCCESS;
         }catch(HibernateException e){
             return result = INPUT;
-
         }
-
     }
+
+
+
 
 
     /**

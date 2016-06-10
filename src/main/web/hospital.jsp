@@ -19,7 +19,7 @@
 <ul>
     <s:iterator value="hospital.departments">
         <li>
-            <s:url var="departmentUrl" action="department">
+            <s:url var="departmentUrl" action="get">
                 <s:param name="id">
                     <s:property value="id"/>
                 </s:param>
