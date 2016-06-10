@@ -58,7 +58,6 @@
                 <param name="root">
                     data
                 </param>
-
             </result>
         </action>
 
@@ -68,7 +67,6 @@
                 <param name="root">
                     data
                 </param>
-
             </result>
         </action>
 
@@ -128,6 +126,8 @@
         <action name="unRegister" class="action.RegistrationAction" method="unRegister">
             <result name="success">welcome.jsp</result>
         </action>
+
+
 
 
     </package>

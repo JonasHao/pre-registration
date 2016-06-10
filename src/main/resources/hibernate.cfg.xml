@@ -35,6 +35,7 @@
         <mapping class="po.Capacity"/>
         <mapping class="po.Contact"/>
         <mapping class="po.Order"/>
+        <mapping class="po.Privilege"/>
 
 
     </session-factory>
