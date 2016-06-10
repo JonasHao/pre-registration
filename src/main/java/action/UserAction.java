@@ -2,6 +2,7 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import org.hibernate.HibernateException;
+import po.Privilege;
 import po.User;
 import service.UserService;
 
@@ -65,7 +66,7 @@ public class UserAction extends BaseAction {
 
         user = new User(username, password.hashCode(), phone);
         try {
-            userService.addUser(user);
+            userService.signUp(user);
             ActionContext context = ActionContext.getContext();
             context.getSession().put("username", username);
             return result = SUCCESS;

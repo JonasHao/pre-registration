@@ -1,15 +1,8 @@
 package action;
 
-
-
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import com.sun.org.apache.xml.internal.serializer.SerializerTrace;
-import org.apache.struts2.dispatcher.DefaultActionSupport;
 import org.hibernate.HibernateException;
-import org.springframework.ejb.access.EjbAccessException;
 import po.Department;
 import po.Hospital;
-import po.Privilege;
 import service.DepartmentService;
 import service.PrivilegeService;
 
@@ -25,19 +18,8 @@ public class DepartmentAction extends BaseAction {
     private DepartmentService departmentService;
     private PrivilegeService privilegeService;
 
-    public void setPrivilegeService(PrivilegeService privilegeService) {
-        this.privilegeService = privilegeService;
-    }
-
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
-
-    //
     public String get() throws Exception {
-
         return SUCCESS;
-
     }
 
     public String add()throws Exception{
@@ -55,6 +37,7 @@ public class DepartmentAction extends BaseAction {
     public String delete()throws Exception{
           return result= SUCCESS;
     }
+
     public void update(){
 
     }
@@ -82,15 +65,20 @@ public class DepartmentAction extends BaseAction {
     }
 
 
-
-
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setPrivilegeService(PrivilegeService privilegeService) {
+        this.privilegeService = privilegeService;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
 

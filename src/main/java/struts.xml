@@ -107,6 +107,16 @@
             <result name="error">error.jsp</result>
         </action>
 
+        <action name="addDepartment" class="action.DepartmentAction" method="add">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
         <action name="doctor" class="action.DoctorAction" method="get">
             <result>doctor.jsp</result>
             <result name="error">error.jsp</result>

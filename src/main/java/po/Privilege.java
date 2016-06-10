@@ -13,10 +13,10 @@ public class Privilege {
     private User user;
     private Hospital hospital;
 
-
-
-    public Privilege(){}
-
+    public Privilege(){
+        root = false;
+        hospital = null;
+    }
 
     @Id
     @GeneratedValue
@@ -27,8 +27,6 @@ public class Privilege {
     public boolean isRoot() {
         return root;
     }
-
-
 
     public void setId(long id) {
         this.id = id;

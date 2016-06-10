@@ -13,22 +13,17 @@ public class BaseDao {
     protected SessionFactory sessionFactory;
 
     public void save(Object o) throws HibernateException {
-        Session session = sessionFactory.openSession();
-        Transaction transaction= session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(o);
-        transaction.commit();
-        session.flush();
-        session.close();
-//          Session session = sessionFactory.getCurrentSession();
-//          session.beginTransaction();
-//          session.save(o);
-//          session.close();
+        session.getTransaction().commit();
     }
 
     public void save(List<Object> ts) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         ts.forEach(session::save);
+        session.getTransaction().commit();
     }
 
     public <T> T get(Class<T> entityType, Serializable id) throws HibernateException {
@@ -36,7 +31,6 @@ public class BaseDao {
         session.beginTransaction();
         return session.get(entityType, id);
     }
-
 
 
     public Query query(String queryString) {
@@ -49,7 +43,7 @@ public class BaseDao {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.update(o);
-        session.flush();
+        session.getTransaction().commit();
         return o;
     }
 
@@ -57,14 +51,7 @@ public class BaseDao {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.delete(o);
-//        session.close();
-
-//        Session session = sessionFactory.openSession();
-//        Transaction transaction= session.beginTransaction();
-//        session.delete(o);
-//        transaction.commit();
-//        session.flush();
-//        session.close();
+        session.getTransaction().commit();
 
     }
 

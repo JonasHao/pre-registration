@@ -25,7 +25,6 @@ public class HospitalAction extends BaseAction {
     private String hospitalAddress_city;
     private String hospitalAddress_area;
     private String hospitalAddress_detail;
-//    private int size;
 
     private Hospital hospital;
     private HospitalService hospitalService;
@@ -55,14 +54,7 @@ public class HospitalAction extends BaseAction {
 
     //删除医院
     public String deleteHospital() throws Exception{
-//        hospital = new Hospital();
-//        hospital.setId(hospitalID);
-//        hospital.setName(hospitalName);
-//        hospital.setDescription(hospitalDes);
-//        hospital.setAddress_province(hospitalAddress_province);
-//        hospital.setAddress_city(hospitalAddress_city);
-//        hospital.setAddress_area(hospitalAddress_area);
-//        hospital.setAddress_detail(hospitalAddress_detail);
+        // todo： 捕捉Hibernate异常
         hospitalService.deleteHospital(hospitalID);
         return result = SUCCESS;
     }
@@ -70,7 +62,7 @@ public class HospitalAction extends BaseAction {
     //修改医院
     public String updateHospital() throws Exception{
         hospital = hospitalService.getByID(hospitalID);
-
+        // todo:数据校验。判断是否为空，不为空再set
 //        hospital.setName(hospitalName);
 //        hospital.setDescription(hospitalDes);
 //        hospital.setAddress_province(hospitalAddress_province);
@@ -78,9 +70,10 @@ public class HospitalAction extends BaseAction {
 //        hospital.setAddress_area(hospitalAddress_area);
 //        hospital.setAddress_detail(hospitalAddress_detail);
 //        hospitalService.updateHospital(hospital);
-
+//
         hospital.setName("嘉璇大好人");
         System.out.println(hospital.getName());
+        hospitalService.updateHospital(hospital);
 
         return result = SUCCESS;
     }
@@ -107,7 +100,6 @@ public class HospitalAction extends BaseAction {
                 department.setOrders(null);
                 department.setDoctors(null);
                 department.setHospital(null);
-
             }
             addData("hospital",hospital);
             return result = SUCCESS;
@@ -120,12 +112,11 @@ public class HospitalAction extends BaseAction {
         Hospital hospital_list;
         hospitals = hospitalService.getByAddress(hospitalAddress_province, hospitalAddress_city, hospitalAddress_area);
         if(hospitals != null){
-            int size = hospitals.size();
-            for(int i = 0; i<size; i++){
-                hospital_list = hospitals.get(i);
-                if(hospital_list != null){
+            for (Hospital hospital1 : hospitals) {
+                hospital_list = hospital1;
+                if (hospital_list != null) {
                     hospital_list.setOrders(null);
-                    for(Department department :hospital_list.getDepartments()){
+                    for (Department department : hospital_list.getDepartments()) {
                         department.setOrders(null);
                         department.setDoctors(null);
                         department.setHospital(null);

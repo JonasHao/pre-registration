@@ -12,24 +12,13 @@ import java.util.List;
 /**
  * Created by jinzil on 2016/6/8.
  */
-public class DepartmentServiceImlp implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
     private BaseDao departmentDao;
     private User user;
     @Override
 
     public void add(Department department) {
-
         departmentDao.save(department);
-//        try {
-//            departmentDao.save(department);
-//            return true;
-//        } catch (HibernateException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//
-//    }
-//        return false;
     }
 
     @Override
