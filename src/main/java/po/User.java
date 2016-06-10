@@ -14,7 +14,6 @@ public class User {
     private List<Contact> contacts;
     private List<Order> orders;
 
-
     public User(String ID, long password, String phone) {
         this.ID = ID;
         this.password = password;
@@ -56,7 +55,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner" )
     public List<Contact> getContacts() {

@@ -12,6 +12,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+
     <bean id="userService" class="service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>

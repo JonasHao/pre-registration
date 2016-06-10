@@ -64,8 +64,6 @@ public class UserAction extends DefaultActionSupport {
             ActionContext context = ActionContext.getContext();
             context.getSession().put("username", username);
 
-
-            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return SUCCESS;
 
         }
