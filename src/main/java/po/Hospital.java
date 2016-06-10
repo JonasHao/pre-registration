@@ -12,9 +12,13 @@ import java.util.Set;
  */
 @Entity
 public class Hospital {
-    private long ID;
+    private long id;
     private String name;
     private String description;
+    private String address_province;
+    private String address_city;
+    private String address_area;
+    private String address_detail;
     private Set<Department> departments = new HashSet<>(10);
     private List<Order> orders = new ArrayList<>(10);
 
@@ -23,12 +27,12 @@ public class Hospital {
 
     @Id
     @GeneratedValue
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setId(long ID) {
+        this.id = ID;
     }
 
     public String getName() {
@@ -45,6 +49,38 @@ public class Hospital {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddress_detail() {
+        return address_detail;
+    }
+
+    public void setAddress_detail(String address_detail) {
+        this.address_detail = address_detail;
+    }
+
+    public String getAddress_province() {
+        return address_province;
+    }
+
+    public void setAddress_province(String address_province) {
+        this.address_province = address_province;
+    }
+
+    public String getAddress_city() {
+        return address_city;
+    }
+
+    public void setAddress_city(String address_city) {
+        this.address_city = address_city;
+    }
+
+    public String getAddress_area() {
+        return address_area;
+    }
+
+    public void setAddress_area(String address_area) {
+        this.address_area = address_area;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hospital")

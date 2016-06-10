@@ -20,10 +20,10 @@ public class Department {
 
 
     @SuppressWarnings("unused")
-    public Department(String name, String description, int id) {
+    public Department(String name, String description, Hospital hospital) {
         this.name = name;
         this.description = description;
-        this.id = id;
+        this.hospital=hospital;
     }
 
     public Department() {

@@ -1,39 +1,29 @@
 package service;
 
-import com.opensymphony.xwork2.ActionContext;
-import dao.UserDao;
+import dao.BaseDao;
 import po.User;
 
-import java.util.List;
-import java.util.Map;
-
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
+    private BaseDao dao;
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    @Override
+    public void signUp(User user) {
+        dao.save(user);
+
+    }
+
+    @Override
+    public User get(String name) {
+        return dao.get(User.class, name);
     }
 
 
     @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public String generateToken(User user) {
+        return "fake token";
     }
 
-    @Override
-    public User findUserByID(String name) {
-        return userDao.findUserByID(name);
-    }
-
-    @Override
-    public List<User> listAll() {
-        return userDao.listAll();
-    }
-
-    @Override
-    public String getCurrentUserID() {
-        ActionContext context = ActionContext.getContext();
-        Map session = context.getSession();
-        return (String)session.get("username");
+    public void setBaseDao(BaseDao baseDao) {
+        this.dao = baseDao;
     }
 }

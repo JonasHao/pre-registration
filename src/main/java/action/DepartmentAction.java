@@ -1,29 +1,67 @@
 package action;
 
-import dao.DepartmentDao;
-
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.dispatcher.DefaultActionSupport;
+import org.hibernate.HibernateException;
 import po.Department;
+import po.Hospital;
+import service.DepartmentService;
+import service.PrivilegeService;
 
 
 /**
  * Created by jinzil on 2016/4/25.
  * 科室相关的Action
  */
-public class DepartmentAction extends DefaultActionSupport {
+public class DepartmentAction extends BaseAction {
     private long id;
-    private Department department;
-    private DepartmentDao mDepartmentDao;
-
+    private String name;
+    private String description;
+    private DepartmentService departmentService;
+    private PrivilegeService privilegeService;
 
     public String get() throws Exception {
-        department = mDepartmentDao.get(id);
-        if (department != null) {
-            return SUCCESS;
+        return SUCCESS;
+    }
+
+    public String add()throws Exception{
+        try {
+            Hospital hospital = privilegeService.getAdminHospital();
+            Department department = new Department(name, description, hospital);
+            departmentService.add(department);
+            return result=SUCCESS;
+        }catch(HibernateException e){
+            e.printStackTrace();
+            return result=ERROR;
         }
-        return ERROR;
+    }
+
+    public String delete()throws Exception{
+          return result= SUCCESS;
+    }
+
+    public void update(){
+
+    }
+    public void adminQuery(){
+        Hospital hospital = privilegeService.getAdminHospital();
+        departmentService.getDepartmentByName(this.name,hospital);
+    }
+    public void userQuery(){
+        departmentService.getDepartmentByName(this.name);
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
@@ -35,15 +73,13 @@ public class DepartmentAction extends DefaultActionSupport {
         this.id = id;
     }
 
-    public Department getDepartment() {
-        return department;
+    public void setPrivilegeService(PrivilegeService privilegeService) {
+        this.privilegeService = privilegeService;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
-    public void setDepartmentDao(DepartmentDao departmentDao) {
-        mDepartmentDao = departmentDao;
-    }
+
 }

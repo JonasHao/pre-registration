@@ -26,7 +26,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         Doctor doctor = capacity.getDoctor();
-        User user = userService.findUserByID(userID);
+        User user = userService.get(userID);
 
         Contact contact = contactService.get(ContactID);
 

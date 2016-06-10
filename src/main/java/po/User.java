@@ -10,6 +10,7 @@ public class User {
     private String phone;
     private String email;
     private long password;
+    private Privilege privilege;
 
     private List<Contact> contacts;
     private List<Order> orders;
@@ -18,9 +19,11 @@ public class User {
         this.ID = ID;
         this.password = password;
         this.phone = phone;
+        this.privilege = new Privilege();
     }
 
     public User() {
+        this.privilege = new Privilege();
     }
 
     @Id
@@ -56,7 +59,8 @@ public class User {
         this.email = email;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner" )
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     public List<Contact> getContacts() {
         return contacts;
     }
@@ -72,6 +76,15 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
     }
 
     @Override
