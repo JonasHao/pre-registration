@@ -15,49 +15,29 @@ Date: 2016-06-10 13:52:39
 
 SET FOREIGN_KEY_CHECKS=0;
 
+
 -- ----------------------------
--- Table structure for capacity
+-- Table structure for hospital
 -- ----------------------------
-DROP TABLE IF EXISTS `capacity`;
-CREATE TABLE `capacity` (
+DROP TABLE IF EXISTS `hospital`;
+CREATE TABLE `hospital` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `doctorID` bigint(20) NOT NULL,
-  `slot` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `total` int(11) NOT NULL DEFAULT '0',
-  `surplus` int(11) DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FKk0h5y6o32i4twckbxkn3u3do0` (`doctorID`),
-  CONSTRAINT `FKk0h5y6o32i4twckbxkn3u3do0` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`ID`),
-  CONSTRAINT `capacity_doctor_ID_fk` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `name` varchar(32) DEFAULT NULL,
+  `description` text,
+  `address_area` varchar(255) DEFAULT NULL,
+  `address_city` varchar(255) DEFAULT NULL,
+  `address_detail` varchar(255) DEFAULT NULL,
+  `address_province` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of capacity
+-- Records of hospital
 -- ----------------------------
-INSERT INTO `capacity` VALUES ('0', '1', '2016-05-25 13:56:12', '5', '3');
-INSERT INTO `capacity` VALUES ('1', '1', '2016-05-26 17:42:09', '8', '8');
+INSERT INTO `hospital` VALUES ('1', '人民医院', '人民的医院', null, null, null, null);
+INSERT INTO `hospital` VALUES ('2', '中心医院', '三级甲等', null, null, null, null);
+INSERT INTO `hospital` VALUES ('3', '三三一医院', '爱尔眼科', null, null, null, null);
 
--- ----------------------------
--- Table structure for contact
--- ----------------------------
-DROP TABLE IF EXISTS `contact`;
-CREATE TABLE `contact` (
-  `IDNo` varchar(32) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `phone` varchar(16) NOT NULL,
-  `userID` varchar(255) NOT NULL,
-  `id` bigint(20) NOT NULL,
-  `default` tinyint(1) NOT NULL DEFAULT '0',
-  KEY `FKsubw8e0ktm9gb89rwqgqx16rj` (`userID`),
-  CONSTRAINT `FKsubw8e0ktm9gb89rwqgqx16rj` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
-  CONSTRAINT `contact_user_id_fk` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of contact
--- ----------------------------
-INSERT INTO `contact` VALUES ('430225222222222222', 'Koche', '18888888888', 'koche', '0', '0');
-INSERT INTO `contact` VALUES ('4355966966659665', 'Jonas', '18859888888', 'koche', '1', '0');
 
 -- ----------------------------
 -- Table structure for department
@@ -104,6 +84,75 @@ INSERT INTO `doctor` VALUES ('1', '神奇医生', '包治百病', '1', '高级�
 INSERT INTO `doctor` VALUES ('2', '赤脚医生', '百姓的福音', '1', '中级医生');
 
 -- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` varchar(20) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('jinyueyuan', '1736225443', '18889898989', null);
+INSERT INTO `user` VALUES ('kil', '106190', '18889898987', null);
+INSERT INTO `user` VALUES ('koche', '1449589344', '18559659866', null);
+INSERT INTO `user` VALUES ('wangjiaxuan', '-416002423', '18889898980', null);
+
+-- ----------------------------
+-- Table structure for capacity
+-- ----------------------------
+DROP TABLE IF EXISTS `capacity`;
+CREATE TABLE `capacity` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `doctorID` bigint(20) NOT NULL,
+  `slot` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `total` int(11) NOT NULL DEFAULT '0',
+  `surplus` int(11) DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `FKk0h5y6o32i4twckbxkn3u3do0` (`doctorID`),
+  CONSTRAINT `FKk0h5y6o32i4twckbxkn3u3do0` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`ID`),
+  CONSTRAINT `capacity_doctor_ID_fk` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+-- ----------------------------
+-- Records of capacity
+-- ----------------------------
+INSERT INTO `capacity` VALUES ('0', '1', '2016-05-25 13:56:12', '5', '3');
+INSERT INTO `capacity` VALUES ('1', '1', '2016-05-26 17:42:09', '8', '8');
+
+-- ----------------------------
+-- Table structure for contact
+-- ----------------------------
+DROP TABLE IF EXISTS `contact`;
+CREATE TABLE `contact` (
+  `IDNo` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `phone` varchar(16) NOT NULL,
+  `userID` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `default` tinyint(1) NOT NULL DEFAULT '0',
+  KEY `FKsubw8e0ktm9gb89rwqgqx16rj` (`userID`),
+  CONSTRAINT `FKsubw8e0ktm9gb89rwqgqx16rj` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
+  CONSTRAINT `contact_user_id_fk` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of contact
+-- ----------------------------
+INSERT INTO `contact` VALUES ('430225222222222222', 'Koche', '18888888888', 'koche', '0', '0');
+INSERT INTO `contact` VALUES ('4355966966659665', 'Jonas', '18859888888', 'koche', '1', '0');
+
+
+
+
+-- ----------------------------
 -- Table structure for hibernate_sequence
 -- ----------------------------
 DROP TABLE IF EXISTS `hibernate_sequence`;
@@ -121,27 +170,7 @@ INSERT INTO `hibernate_sequence` VALUES ('5');
 INSERT INTO `hibernate_sequence` VALUES ('5');
 INSERT INTO `hibernate_sequence` VALUES ('5');
 
--- ----------------------------
--- Table structure for hospital
--- ----------------------------
-DROP TABLE IF EXISTS `hospital`;
-CREATE TABLE `hospital` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) DEFAULT NULL,
-  `description` text,
-  `address_area` varchar(255) DEFAULT NULL,
-  `address_city` varchar(255) DEFAULT NULL,
-  `address_detail` varchar(255) DEFAULT NULL,
-  `address_province` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of hospital
--- ----------------------------
-INSERT INTO `hospital` VALUES ('1', '人民医院', '人民的医院', null, null, null, null);
-INSERT INTO `hospital` VALUES ('2', '中心医院', '三级甲等', null, null, null, null);
-INSERT INTO `hospital` VALUES ('3', '三三一医院', '爱尔眼科', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for privilege
@@ -199,22 +228,4 @@ CREATE TABLE `registrations` (
 INSERT INTO `registrations` VALUES ('19', '2016-05-24 16:45:06', '2016-05-25 13:56:12', 'Jonas', '4355966966659665', '18859888888', '0', 'koche', '1', '1', '1', '神奇医生', '外科', '人民医院');
 INSERT INTO `registrations` VALUES ('20', '2016-05-24 16:45:07', '2016-05-25 13:56:12', 'Jonas', '4355966966659665', '18859888888', '0', 'koche', '1', '1', '1', '神奇医生', '外科', '人民医院');
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` varchar(20) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('jinyueyuan', '1736225443', '18889898989', null);
-INSERT INTO `user` VALUES ('kil', '106190', '18889898987', null);
-INSERT INTO `user` VALUES ('koche', '1449589344', '18559659866', null);
-INSERT INTO `user` VALUES ('wangjiaxuan', '-416002423', '18889898980', null);
