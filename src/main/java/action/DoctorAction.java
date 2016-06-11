@@ -49,7 +49,7 @@ public class DoctorAction extends BaseAction {
             doctorService.add(doctor);
             return result = SUCCESS;
         }
-        addFieldError("doctor", "医生不合法");
+        addFieldError("doctor", "医生不合法", "103");
         return result = ERROR;
     }
 
