@@ -1,14 +1,11 @@
 package action;
 
-import org.apache.struts2.dispatcher.DefaultActionSupport;
 import po.Department;
 import po.Doctor;
-import po.Hospital;
 import service.DepartmentService;
 import service.DoctorService;
 import service.PrivilegeService;
 
-import javax.print.Doc;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +42,7 @@ public class DoctorAction extends BaseAction {
         }
 
         Doctor doctor = new Doctor(name, introduction, department, title, image);
-        if (doctor != null) {
+        if (null != doctor) {
             doctorService.add(doctor);
             return result = SUCCESS;
         }

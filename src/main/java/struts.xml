@@ -64,27 +64,36 @@
         <action name="cancel" class="action.OrderAction" method="cancel">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+                <param name="root">data</param>
+            </result>
+
+            <result name="error" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">data</param>
             </result>
         </action>
 
         <action name="all" class="action.OrderAction" method="all">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+                <param name="root">data</param>
+            </result>
+
+            <result name="error" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">data</param>
             </result>
         </action>
 
         <action name="get" class="action.OrderAction" method="get">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+                <param name="root">data</param>
+            </result>
+
+            <result name="error" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">data</param>
             </result>
         </action>
 
@@ -101,6 +110,17 @@
             </result>
         </action>
 
+        <action name="delete" class="action.OrderAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">data</param>
+            </result>
+
+            <result name="error" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">data</param>
+            </result>
+        </action>
 
     </package>
 

@@ -159,7 +159,12 @@ public class OrderAction extends BaseAction {
         }
 
         try {
-            addData("order", orderService.get(orderID));
+            Order order = orderService.get(orderID);
+            order.setHospital(null);
+            order.setDepartment(null);
+            order.setDoctor(null);
+            order.setUser(null);
+            addData("order", order);
             return result = SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
