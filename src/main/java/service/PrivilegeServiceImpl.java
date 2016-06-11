@@ -31,10 +31,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
 
     @Override
-    public Hospital getAdminHospital() {
-        User user =  userService.get("koche");
+    public Hospital getAdminHospital(String userName) {
+        User user =  userService.get(userName);
         Privilege privilege = user.getPrivilege();
-        Hospital hospital = privilege.getHospital();
-        return hospital;
+        return privilege.getHospital();
     }
 }

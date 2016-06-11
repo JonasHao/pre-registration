@@ -16,5 +16,5 @@ public interface DepartmentService {
     Department get(long id);
     void update(Department department);
     void delete(long id);
-
+    List<Department> showAll(long hospitalID);
 }

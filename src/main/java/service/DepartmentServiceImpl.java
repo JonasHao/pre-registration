@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DepartmentServiceImpl implements DepartmentService {
     private BaseDao departmentDao;
-    private User user;
+
     @Override
 
     public void add(Department department) {
@@ -37,7 +37,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department get(long id) {
         return departmentDao.get(Department.class,id);
     }
-
+    @Override
+    public List<Department> showAll(long hospitalID){
+        return departmentDao.query("from Department where hospitalID=?").setParameter(0,hospitalID).list();
+    }
     @Override
     public void update(Department department) {
         departmentDao.update(department);
@@ -45,8 +48,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void delete(long id) {
-        Object department=departmentDao.query("from Department,Privilege where Department.id=?")
-                .setParameter(0,id).list().get(0);
+       // Department department=(Department) departmentDao.query("from Department where Department.id=?")
+        //        .setParameter(0,id).list().get(0);
+        Department department=departmentDao.get(Department.class,id);
         departmentDao.delete(department);
     }
 

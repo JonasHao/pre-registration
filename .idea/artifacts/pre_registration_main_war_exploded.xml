@@ -94,7 +94,6 @@
           <element id="library" level="project" name="Gradle: net.sf.json-lib:json-lib:2.3:jdk15" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="pre-registration/web/Web" />
     </root>
   </artifact>
 </component>

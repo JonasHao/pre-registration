@@ -14,7 +14,6 @@ public class Department {
     private String name;
     private String description;
     private String image;
-
     private Hospital hospital;
     private List<Doctor> doctors = new ArrayList<>(10);
     private List<Order> orders = new ArrayList<>(10);
