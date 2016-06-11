@@ -15,15 +15,15 @@ import java.util.Map;
 
 public class DoctorAction extends BaseAction {
     private long id;
-    private String name;
-    private String introduction;
-    private String title;
-    private String image;
+    private String name = null;
+    private String introduction = null;
+    private String title = null;
+    private String image = null;
     private Doctor doctor;
 
     private List<Long> doctorList;
 
-    private long departmentId;
+    private long departmentId = -1;
 
     private DoctorService doctorService;
     private DepartmentService departmentService;
@@ -33,11 +33,6 @@ public class DoctorAction extends BaseAction {
 
     public String add() throws Exception
     {
-        if (privilegeService.getAdminHospital() == null)
-        {
-            addFieldError("user", "用户权限不足", "110");
-            return result = ERROR;
-        }
         if (name == null) {
             addFieldError("name", "没有输入名字", "101");
             return result = ERROR;
@@ -60,30 +55,37 @@ public class DoctorAction extends BaseAction {
 
     public String delete() throws Exception
     {
-        if (privilegeService.getAdminHospital() == null)
-        {
-            addFieldError("user", "用户权限不足", "110");
-            return result = ERROR;
-        }
         doctorService.delete(id);
         return result = SUCCESS;
     }
 
     public String update() throws  Exception
     {
-        if (privilegeService.getAdminHospital() == null)
-        {
-            addFieldError("user", "用户权限不足", "110");
-            return result = ERROR;
-        }
         Doctor doctor = doctorService.get(id);
-        Department department = departmentService.get(departmentId);
-        if (department == null)
-        {
-            addFieldError("department", "部门不存在", "102");
-            return result = ERROR;
+        if (departmentId != -1) {
+            Department department = departmentService.get(departmentId);
+            if (department == null) {
+                addFieldError("department", "部门不存在", "102");
+                return result = ERROR;
+            }
+            doctor.setDepartment(department);
         }
-        doctor.setDepartment(department);
+        if (name != null)
+        {
+            doctor.setName(name);
+        }
+        if (introduction != null)
+        {
+            doctor.setIntroduction(introduction);
+        }
+        if (title != null)
+        {
+            doctor.setTitle(title);
+        }
+        if (image != null)
+        {
+            doctor.setImage(image);
+        }
         doctorService.update(doctor);
         return result = SUCCESS;
     }

@@ -21,12 +21,12 @@ public class CapacityAction extends BaseAction {
 
     private DoctorService doctorService;
     private CapacityService capacityService;
-    private long id;
-    private long doctorId;
+    private long id = -1;
+    private long doctorId = -1;
     private Calendar slot;
     private Calendar startTime;
     private Calendar endTime;
-    private int total;
+    private int total = -1;
 
 
     public String add() {
@@ -45,14 +45,21 @@ public class CapacityAction extends BaseAction {
     }
 
     public String update(){
-        Capacity capacity = capacityService.get(id);
-        Doctor doctor = doctorService.get(doctorId);
-        if (doctor == null)
-        {
-            addFieldError("doctor", "医生不存在", "103");
-            return result = ERROR;
+        Capacity capacity;
+        Doctor doctor = null;
+        capacity = capacityService.get(id);
+        if (doctorId != -1) {
+            doctor = doctorService.get(doctorId);
+            if (doctor == null) {
+                addFieldError("doctor", "医生不存在", "103");
+                return result = ERROR;
+            }
+            capacity.setDoctor(doctor);
         }
-        capacity.setDoctor(doctor);
+
+        if (total != -1) {
+            capacity.setTotal(total);
+        }
         capacityService.update(capacity);
         return result = SUCCESS;
     }
