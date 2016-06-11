@@ -59,6 +59,20 @@ public class DepartmentAction extends BaseAction {
         }
     }
 
+    public String detailShow(){
+        try {
+            department = departmentService.get(id);
+            department.setOrders(null);
+            department.getHospital().setOrders(null);
+            department.getHospital().setDepartments(null);
+            addData("department", department);
+            return result = SUCCESS;
+        }catch(HibernateException e){
+            e.printStackTrace();
+            return result=ERROR;
+        }
+    }
+
     public String add()throws Exception{
         try {
             department=new Department();

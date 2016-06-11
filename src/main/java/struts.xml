@@ -191,6 +191,17 @@
             </result>
             <result name="error">error.jsp</result>
         </action>
+
+        <action name="detailShow" class="action.DepartmentAction" method="detailShow">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
     </package>
 
     <package name="doctor" namespace="/doctor" extends="json-default">
