@@ -52,7 +52,13 @@ public class BaseDao {
         session.beginTransaction();
         session.delete(o);
         session.getTransaction().commit();
+    }
 
+    public void refresh(Object o )throws HibernateException{
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.refresh(o);
+        session.getTransaction().commit();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

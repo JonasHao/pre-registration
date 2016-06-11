@@ -1,17 +1,25 @@
 package service;
 
+import dao.BaseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import po.*;
+import utils.Constants;
 
 
-public class RegistrationServiceImpl implements RegistrationService {
+public class OrderServiceImpl implements OrderService {
 
     private CapacityService capacityService;
     private ContactService contactService;
     private SessionFactory sessionFactory;
     private UserService userService;
+    private BaseDao dao;
+
+    @Override
+    public Order get(long orderID) {
+        return dao.get(Order.class,orderID);
+    }
 
     @Override
     public boolean create(String userID, long CapacityID, long ContactID) {
@@ -47,6 +55,17 @@ public class RegistrationServiceImpl implements RegistrationService {
         return true;
     }
 
+    public void cancel(long orderID){
+        Order order = dao.get(Order.class, orderID);
+        order.setOrderStatus(Constants.ORDER_STATUS_CANCELED);
+        dao.save(order);
+    }
+
+    @Override
+    public void delete(long orderID) {
+        dao.delete(dao.get(Order.class, orderID));
+    }
+
 
     public void setCapacityService(CapacityService capacityService) {
         this.capacityService = capacityService;
@@ -62,5 +81,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    public void setDao(BaseDao dao) {
+        this.dao = dao;
     }
 }

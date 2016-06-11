@@ -3,35 +3,33 @@ package service;
 import dao.BaseDao;
 import po.Capacity;
 
-import java.util.List;
-
 
 public class CapacityServiceImpl implements CapacityService {
-    private BaseDao capacityDao;
+    private BaseDao dao;
 
     @Override
     public void add(Capacity capacity){
-        capacityDao.save(capacity);
+        dao.save(capacity);
     }
 
     @Override
     public Capacity get(long id) {
-        return capacityDao.get(Capacity.class, id);
+        return dao.get(Capacity.class, id);
     }
 
     @Override
     public void update(Capacity capacity){
-        capacityDao.update(capacity);
+        dao.update(capacity);
     }
 
     @Override
     public void delete(long id){
         Capacity capacity = get(id);
-        capacityDao.delete(capacity);
+        dao.delete(capacity);
     }
 
-    public void setCapacityDao(BaseDao capacityDao) {
-        this.capacityDao = capacityDao;
+    public void setDao(BaseDao dao) {
+        this.dao = dao;
     }
 
 }

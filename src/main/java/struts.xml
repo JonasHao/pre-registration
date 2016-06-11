@@ -41,19 +41,64 @@
         </action>
 
 
-        <action name="fill" class="action.RegistrationAction" method="fillOrder">
+    </package>
+
+    <package name="order" namespace="/order" extends="json-default">
+
+        <action name="fill" class="action.OrderAction" method="fillOrder">
             <result name="success">fill.jsp</result>
             <result name="input">login.jsp</result>
             <result name="out">doctor.jsp</result>
         </action>
 
-        <action name="order" class="action.RegistrationAction" method="order">
-            <result name="success">welcome.jsp</result>
+        <action name="commit" class="action.OrderAction" method="commit">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
             <result name="out">login.jsp</result>
         </action>
 
-        <action name="unRegister" class="action.RegistrationAction" method="unRegister">
-            <result name="success">welcome.jsp</result>
+        <action name="cancel" class="action.OrderAction" method="cancel">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="all" class="action.OrderAction" method="all">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="get" class="action.OrderAction" method="get">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="test" class="action.OrderAction" method="test">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
         </action>
 
 

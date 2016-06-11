@@ -9,7 +9,6 @@
     </bean>
 
 
-
     <bean id="userService" class="service.UserServiceImpl">
         <property name="baseDao" ref="baseDao"/>
     </bean>
@@ -19,25 +18,23 @@
     </bean>
 
 
-
-
-
-    <bean id="registrationService" class="service.RegistrationServiceImpl">
+    <bean id="orderService" class="service.OrderServiceImpl">
         <property name="capacityService" ref="capacityService"/>
         <property name="contactService" ref="contactService"/>
         <property name="sessionFactory" ref="sessionFactory"/>
         <property name="userService" ref="userService"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
     <bean id="capacityService" class="service.CapacityServiceImpl">
-        <property name="capacityDao" ref="baseDao"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
 
-    <bean id="registrationAction" class="action.RegistrationAction">
+    <bean id="orderAction" class="action.OrderAction">
         <property name="doctorService" ref="doctorService"/>
         <property name="userService" ref="userService"/>
-        <property name="registrationService" ref="registrationService"/>
+        <property name="orderService" ref="orderService"/>
         <property name="capacityService" ref="capacityService"/>
         <property name="privilegeService" ref="privilegeService"/>
     </bean>

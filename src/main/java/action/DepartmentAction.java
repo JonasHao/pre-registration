@@ -28,7 +28,7 @@ public class DepartmentAction extends BaseAction {
 
     public String adminShow() throws Exception {
         try {
-            Hospital hospital = privilegeService.getAdminHospital(userName);
+            Hospital hospital = privilegeService.getAdminHospital();
             departments=departmentService.showAll(hospital.getId());
             for(Department department:departments){
                 department.setOrders(null);
@@ -79,7 +79,7 @@ public class DepartmentAction extends BaseAction {
             department.setName(name);
             department.setImage(image);
             department.setDescription(description);
-            Hospital hospital = privilegeService.getAdminHospital(userName);
+            Hospital hospital = privilegeService.getAdminHospital();
             department.setHospital(hospital);
             departmentService.add(department);
             return result=SUCCESS;
@@ -114,7 +114,7 @@ public class DepartmentAction extends BaseAction {
     }
     public String adminQuery(){
         try {
-            Hospital hospital = privilegeService.getAdminHospital(userName);
+            Hospital hospital = privilegeService.getAdminHospital();
             department=departmentService.getDepartmentByName(name, hospital);
             department.setOrders(null);
             department.getHospital().setOrders(null);

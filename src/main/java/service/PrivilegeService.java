@@ -11,5 +11,5 @@ public interface PrivilegeService {
 
     User getCurrentUser();
 
-    Hospital getAdminHospital(String userName);
+    Hospital getAdminHospital();
 }
