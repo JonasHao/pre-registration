@@ -48,6 +48,10 @@ public class HospitalAction extends BaseAction {
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(hospitalName + hospitalDes);
         hospitalService.addHospital(hospital);
+
+        //再次显示所有医院列表
+        query();
+
         return result = SUCCESS;
     }
 
@@ -55,6 +59,10 @@ public class HospitalAction extends BaseAction {
     public String deleteHospital() throws Exception{
         // todo： 捕捉Hibernate异常
         hospitalService.deleteHospital(hospitalID);
+
+        //再次显示所有医院列表
+        query();
+
         return result = SUCCESS;
     }
 
