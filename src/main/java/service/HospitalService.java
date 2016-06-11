@@ -41,8 +41,19 @@ public class HospitalService {
     }
 
     public Hospital getByID(long id){
-        return dao.get(Hospital.class,id);
+        return dao.get(Hospital.class, id);
     }
+
+//    public Hospital getByName(String hospitalName){
+//        return dao.get(Hospital.class,hospitalName);
+//    }
+
+@SuppressWarnings("unchecked")
+    public List<Hospital> getByName(String hospitalName){
+        return dao.query("from Hospital where name=?").
+                setParameter(0, hospitalName).list();
+    }
+
 @SuppressWarnings("unchecked")
     public List<Hospital> getByAddress(String address_province, String address_city, String address_area){
         return dao.query("from Hospital where address_province=? and address_city = ? and address_area = ?").

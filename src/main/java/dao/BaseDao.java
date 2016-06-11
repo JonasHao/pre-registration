@@ -26,12 +26,12 @@ public class BaseDao {
         session.getTransaction().commit();
     }
 
+
     public <T> T get(Class<T> entityType, Serializable id) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         return session.get(entityType, id);
     }
-
 
     public Query query(String queryString) {
         Session session = sessionFactory.getCurrentSession();

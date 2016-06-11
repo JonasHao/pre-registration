@@ -166,7 +166,17 @@
         </action>
 
 
-        <action name="get" class="action.HospitalAction" method="getHospitalByID">
+        <action name="getByID" class="action.HospitalAction" method="getHospitalByID">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getByName" class="action.HospitalAction" method="getHospitalByName">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
                 <param name="root">

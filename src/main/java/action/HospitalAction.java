@@ -70,9 +70,15 @@ public class HospitalAction extends BaseAction {
 //        hospital.setAddress_detail(hospitalAddress_detail);
 //        hospitalService.updateHospital(hospital);
 //
-        hospital.setName("嘉璇大好人");
+        if(hospital != null){
+            hospital.setName("嘉璇大好人");
+        }
+
         System.out.println(hospital.getName());
         hospitalService.updateHospital(hospital);
+
+        //再次显示所有医院列表
+        query();
 
         return result = SUCCESS;
     }
@@ -89,6 +95,8 @@ public class HospitalAction extends BaseAction {
         return result = SUCCESS;
     }
 
+
+
     //通过医院ID来获取医院信息
     public String getHospitalByID() throws Exception {
         hospital = hospitalService.getByID(hospitalID);
@@ -101,6 +109,29 @@ public class HospitalAction extends BaseAction {
                 department.setHospital(null);
             }
             addData("hospital",hospital);
+            return result = SUCCESS;
+        }
+        return result = ERROR;
+    }
+
+    //通过医院名称来获取医院信息
+    public String getHospitalByName() throws Exception {
+        Hospital hospital_list;
+        hospitals = hospitalService.getByName(hospitalName);
+        if (hospitals != null) {
+            // prevent serialize orders
+            for (Hospital hospital1 : hospitals) {
+                hospital_list = hospital1;
+                if (hospital_list != null) {
+                    hospital_list.setOrders(null);
+                    for (Department department : hospital_list.getDepartments()) {
+                        department.setOrders(null);
+                        department.setDoctors(null);
+                        department.setHospital(null);
+                    }
+                }
+            }
+            addData("hospitals",hospitals);
             return result = SUCCESS;
         }
         return result = ERROR;
