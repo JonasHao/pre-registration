@@ -10,7 +10,7 @@ import java.util.List;
  * encapsulate C(save) R(get) U(update) D(delete) operations
  */
 public class BaseDao {
-    protected SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public void save(Object o) throws HibernateException {
         Session session = sessionFactory.getCurrentSession();

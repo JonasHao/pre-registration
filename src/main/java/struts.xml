@@ -147,4 +147,43 @@
         </action>
     </package>
 
+    <package name="contact" namespace="/contact" extends="json-default">
+        <action name="list" class="action.ContactAction" method="query">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="add" class="action.ContactAction" method="create">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="update" class="action.ContactAction" method="modify">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="delete" class="action.ContactAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+    </package>
+
 </struts>

@@ -10,6 +10,5 @@ public interface UserService {
 
     User get(String id);
 
-
     String generateToken(User user);
 }

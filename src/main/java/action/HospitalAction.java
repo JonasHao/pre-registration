@@ -30,7 +30,6 @@ public class HospitalAction extends BaseAction {
     private HospitalService hospitalService;
 
 
-
     /***
      * 根据条件查询医院列表, 默认查询所有医院，截取前10条记录
      *

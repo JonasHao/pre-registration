@@ -84,3 +84,4 @@ gradle-app.setting
 .idea/copyright/
 src/main/web/META-INF/
 src/test/resources/
+/src/main/resources/hibernate.cfg.xml
