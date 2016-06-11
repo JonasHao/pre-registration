@@ -1,5 +1,6 @@
 package action;
 
+import po.Capacity;
 import po.Department;
 import po.Doctor;
 import service.DepartmentService;
@@ -85,6 +86,24 @@ public class DoctorAction extends BaseAction {
         }
         doctorService.update(doctor);
         return result = SUCCESS;
+    }
+
+    public String get() throws Exception {
+        Doctor doctor = doctorService.get(id);
+        if (doctor != null){
+            doctor.getDepartment().setHospital(null);
+            doctor.getDepartment().setDoctors(null);
+            doctor.getDepartment().setOrders(null);
+            for (Capacity capacity : doctor.getCapacities())
+            {
+                capacity.setDoctor(null);
+            }
+            doctor.setOrders(null);
+
+            addData("doctor", doctor);
+            return result = SUCCESS;
+        }
+        return result = ERROR;
     }
 
     public String getDoctors() throws Exception {
