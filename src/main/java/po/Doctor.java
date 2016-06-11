@@ -16,7 +16,15 @@ public class Doctor {
     private List<Capacity> capacities = new ArrayList<>(10);
     private List<Order> orders = new ArrayList<>(10);
 
-    public Doctor() {
+    public Doctor(){
+    }
+
+    public Doctor(String name, String introduction, Department department, String title, String image) {
+        this.name = name;
+        this.introduction = introduction;
+        this.department = department;
+        this.title = title;
+        this.image = image;
     }
 
     @Id
@@ -71,7 +79,7 @@ public class Doctor {
         this.department = department;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
     public List<Capacity> getCapacities() {
         return capacities;
     }

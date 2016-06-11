@@ -16,8 +16,15 @@ public class Capacity {
     private int total;
     private int surplus;
 
-
     public Capacity() {
+    }
+
+    public Capacity(Doctor doctor, Calendar slot, int total)
+    {
+        this.doctor = doctor;
+        this.slot = slot;
+        this.total = total;
+        this.surplus  = total;
     }
 
     @Id
@@ -30,7 +37,7 @@ public class Capacity {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctorID", nullable = false)
     public Doctor getDoctor() {
         return doctor;

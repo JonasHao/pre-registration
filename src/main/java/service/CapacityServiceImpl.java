@@ -1,30 +1,37 @@
 package service;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import dao.BaseDao;
 import po.Capacity;
 
 import java.util.List;
 
 
 public class CapacityServiceImpl implements CapacityService {
-    private SessionFactory mSessionFactory;
+    private BaseDao capacityDao;
 
     @Override
-    public void refresh(Capacity capacity) {
-        Session session = mSessionFactory.getCurrentSession();
-        session.beginTransaction();
-        session.refresh(capacity);
+    public void add(Capacity capacity){
+        capacityDao.save(capacity);
     }
 
     @Override
     public Capacity get(long id) {
-
-        return null;
+        return capacityDao.get(Capacity.class, id);
     }
 
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        mSessionFactory = sessionFactory;
+    @Override
+    public void update(Capacity capacity){
+        capacityDao.update(capacity);
     }
+
+    @Override
+    public void delete(long id){
+        Capacity capacity = get(id);
+        capacityDao.delete(capacity);
+    }
+
+    public void setCapacityDao(BaseDao capacityDao) {
+        this.capacityDao = capacityDao;
+    }
+
 }

@@ -141,8 +141,88 @@
     </package>
 
     <package name="doctor" namespace="/doctor" extends="json-default">
-        <action name="get" class="action.DoctorAction" method="get">
-            <result>doctor.jsp</result>
+        <action name="add" class="action.DoctorAction" method="add">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="delete" class="action.DoctorAction" method="delete">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="update" class="action.DoctorAction" method="update">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getDoctors" class="action.DoctorAction" method="getDoctors">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteCapacity" class="action.CapacityAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateCapacity" class="action.CapacityAction" method="update">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getCapacity" class="action.CapacityAction" method="getCapacities">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="addCapacity" class="action.CapacityAction" method="add">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
             <result name="error">error.jsp</result>
         </action>
     </package>
