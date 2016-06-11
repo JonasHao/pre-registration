@@ -1,6 +1,7 @@
 package service;
 
 import po.Hospital;
+import po.User;
 
 /**
  * Created by jinzil on 2016/6/8.
@@ -8,5 +9,7 @@ import po.Hospital;
 public interface PrivilegeService {
     String getCurrentUserID();
 
-    Hospital getAdminHospital();
+    User getCurrentUser();
+
+    Hospital getAdminHospital(String userName);
 }

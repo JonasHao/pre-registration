@@ -46,6 +46,13 @@ public class UserAction extends BaseAction {
         return result = SUCCESS;
     }
 
+
+    public String logOut() throws Exception{
+        ActionContext context = ActionContext.getContext();
+        context.getSession().put("username", username);
+        return result=SUCCESS;
+    }
+
     public String singUp() throws Exception {
         if (!validateUsername() && validatePassword()) {
             return result = INPUT;
@@ -73,9 +80,6 @@ public class UserAction extends BaseAction {
             return result = INPUT;
         }
     }
-
-
-
 
 
     /**

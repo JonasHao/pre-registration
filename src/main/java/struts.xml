@@ -124,11 +124,6 @@
 
     <package name="department" namespace="/department" extends="json-default">
 
-        <action name="get" class="action.DepartmentAction" method="get">
-            <result>department.jsp</result>
-            <result name="error">error.jsp</result>
-        </action>
-
         <action name="add" class="action.DepartmentAction" method="add">
             <result name="success" type="json">
                 <param name="excludeNullProperties">true</param>
@@ -138,6 +133,75 @@
             </result>
             <result name="error">error.jsp</result>
         </action>
+        <action name="delete" class="action.DepartmentAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="update" class="action.DepartmentAction" method="update">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="adminQuery" class="action.DepartmentAction" method="adminQuery">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="userQuery" class="action.DepartmentAction" method="userQuery">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="adminShow" class="action.DepartmentAction" method="adminShow">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="userShow" class="action.DepartmentAction" method="userShow">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="detailShow" class="action.DepartmentAction" method="detailShow">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+
     </package>
 
     <package name="doctor" namespace="/doctor" extends="json-default">
@@ -225,6 +289,45 @@
             </result>
             <result name="error">error.jsp</result>
         </action>
+    </package>
+
+    <package name="contact" namespace="/contact" extends="json-default">
+        <action name="list" class="action.ContactAction" method="query">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="add" class="action.ContactAction" method="create">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="update" class="action.ContactAction" method="modify">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
+        <action name="delete" class="action.ContactAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="root">
+                    data
+                </param>
+            </result>
+        </action>
+
     </package>
 
 </struts>

@@ -8,11 +8,14 @@ import java.util.List;
  * Created by Koche on 2016/5/20.
  */
 public interface ContactService {
-    Contact get(String userID, String IDNo);
 
     Contact get(long contactID);
 
-    List<Contact> getAll(String userID);
+    void add(Contact contact);
+
+    void update(Contact contact);
+
+    void delete(long contactID);
 
     Contact getDefault(String userID);
 }

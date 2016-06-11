@@ -45,6 +45,7 @@
     <bean class="service.HospitalService" id="hospitalDao">
         <property name="dao" ref="baseDao"/>
     </bean>
+
     <bean class="action.HospitalAction" id="displayAction">
         <property name="hospitalDao" ref="hospitalDao"/>
     </bean>
@@ -60,7 +61,7 @@
         <property name="privilegeService" ref="privilegeService"/>
     </bean>
     <bean class="service.ContactServiceImpl" id="contactService">
-        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
     <bean class="dao.BaseDao" id="baseDao">
@@ -73,6 +74,10 @@
 
     <bean class="service.PrivilegeServiceImpl" id="privilegeService">
         <property name="userService" ref="userService"/>
+    </bean>
+    <bean class="action.ContactAction" id="contactAction">
+        <property name="contactService" ref="contactService"/>
+        <property name="privilegeService" ref="privilegeService"/>
     </bean>
     <bean class="service.DoctorServiceImpl" id="doctorService">
         <property name="doctorDao" ref="baseDao"/>

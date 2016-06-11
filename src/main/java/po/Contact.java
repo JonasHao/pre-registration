@@ -16,6 +16,13 @@ public class Contact {
     public Contact() {
     }
 
+
+    public Contact(String name, String idNo, String phone) {
+        this.name = name;
+        this.idNo = idNo;
+        this.phone = phone;
+    }
+
     @Id
     @GeneratedValue
     public long getId() {
