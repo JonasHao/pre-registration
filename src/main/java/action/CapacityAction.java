@@ -9,6 +9,7 @@ import service.DoctorService;
 
 import javax.persistence.Convert;
 import java.security.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class CapacityAction extends BaseAction {
     private long id;
     private long doctorId;
     private Calendar slot;
+    private Calendar startTime;
+    private Calendar endTime;
     private int total;
 
 
@@ -56,6 +59,21 @@ public class CapacityAction extends BaseAction {
 
     public String getCapacities()
     {
+        Doctor doctor = doctorService.get(doctorId);
+        List<Capacity> capacityList = doctor.getCapacities();
+        List<Capacity> resList = new ArrayList<>(10);
+        for(Capacity capacity : capacityList)
+        {
+            if (capacity.getSlot().compareTo(startTime) >= 0 && capacity.getSlot().compareTo(endTime) <= 0)
+            {
+                capacity.getDoctor().setCapacities(null);
+                capacity.getDoctor().setOrders(null);
+                capacity.getDoctor().setDepartment(null);
+                resList.add(capacity);
+
+            }
+        }
+        addData("capacities", resList);
         return result = SUCCESS;
     }
 
@@ -108,4 +126,22 @@ public class CapacityAction extends BaseAction {
     public void setSlot(Calendar slot) {
         this.slot = slot;
     }
+
+    public Calendar getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Calendar endTime) {
+        this.endTime = endTime;
+    }
+
+    public Calendar getStartTime() {
+
+        return startTime;
+    }
+
+    public void setStartTime(Calendar startTime) {
+        this.startTime = startTime;
+    }
+
 }
