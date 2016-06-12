@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>postTest</title>
+</head>
+<body>
+
+<button id="b">点击</button>
+
+<div id="target">Target</div>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        var data = [1,2,3];
+        $("#b").click(function(){
+            var htmlobj=$.ajax({
+                url:"localhost:8000/order/test" ,
+                data:  "list:"+data,
+                dataType: 'json',
+                contentType:"application/json;charset=utf-8",
+                success : function(){
+                    alert("You made it!");
+                }});
+            $("#target").html(htmlobj.responseText);
+        });
+    });
+
+</script>
+</body>
+</html>

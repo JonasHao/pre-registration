@@ -30,10 +30,10 @@ CREATE TABLE `Contact` (
 CREATE TABLE `Privilege` (
     `id` INTEGER(64) NOT NULL,
     `root` BOOLEAN NOT NULL,
-    `hospital` BOOLEAN NOT NULL,
-    `department` BOOLEAN NOT NULL,
+    `hospitalID` INTEGER(64) NOT NULL,
     PRIMARY KEY (`id`)
 );
+
 
 CREATE TABLE `RegOrder` (
     `id` INTEGER(64) NOT NULL,
@@ -91,3 +91,4 @@ ALTER TABLE `RegOrder` ADD FOREIGN KEY (`contactID`) REFERENCES `Data Model1`(`C
 ALTER TABLE `Doctor` ADD FOREIGN KEY (`departmentID`) REFERENCES `Data Model1`(`Department`);
 ALTER TABLE `Department` ADD FOREIGN KEY (`hospitalID`) REFERENCES `Data Model1`(`Hospital`);
 ALTER TABLE `Capacity` ADD FOREIGN KEY (`doctorID`) REFERENCES `Data Model1`(`Doctor`);
+ALTER TABLE `Privilege` ADD FOREIGN KEY (`hospitalID`) REFERENCES `doctor`;

@@ -109,7 +109,7 @@ public class Order {
         this.doctorName = doctorName;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userID", nullable = false)
     public User getUser() {
         return user;
@@ -119,7 +119,7 @@ public class Order {
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctorID", nullable = false)
     public Doctor getDoctor() {
         return doctor;
@@ -127,10 +127,9 @@ public class Order {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-//        this.doctorName = doctor.getName();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departmentID", nullable = false)
     public Department getDepartment() {
         return department;
@@ -138,10 +137,9 @@ public class Order {
 
     public void setDepartment(Department department) {
         this.department = department;
-//        this.departmentName = department.getName();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hospitalID", nullable = false)
     public Hospital getHospital() {
         return hospital;
@@ -150,7 +148,6 @@ public class Order {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
-//        this.hospitalName = hospital.getName();
     }
 
     public String getContactIDNo() {

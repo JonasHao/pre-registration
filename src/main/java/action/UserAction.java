@@ -1,7 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.hibernate.HibernateException;
 import po.User;
 import service.UserService;
 
@@ -28,7 +28,7 @@ public class UserAction extends BaseAction {
             return result = INPUT;
         }
 
-        User user = userService.findUserByID(username);
+        User user = userService.get(username);
         if (user == null) {
             addFieldError("username", "这个用户名尚未注册","003");
             return result = INPUT;
@@ -46,6 +46,13 @@ public class UserAction extends BaseAction {
         return result = SUCCESS;
     }
 
+
+    public String logOut() throws Exception{
+        ActionContext context = ActionContext.getContext();
+        context.getSession().put("username", username);
+        return result=SUCCESS;
+    }
+
     public String singUp() throws Exception {
         if (!validateUsername() && validatePassword()) {
             return result = INPUT;
@@ -56,21 +63,22 @@ public class UserAction extends BaseAction {
             return result = INPUT;
         }
 
-        User user = userService.findUserByID(username);
+
+        User user = userService.get(username);
         if (user != null) {
             addFieldError("username", "用户名已经被占用");
             return result = INPUT;
         }
 
         user = new User(username, password.hashCode(), phone);
-        if (userService.addUser(user)) {
+        try {
+            userService.signUp(user);
             ActionContext context = ActionContext.getContext();
             context.getSession().put("username", username);
-            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return result = SUCCESS;
+        }catch(HibernateException e){
+            return result = INPUT;
         }
-
-        return result = INPUT;
     }
 
 

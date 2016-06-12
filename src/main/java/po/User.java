@@ -6,31 +6,35 @@ import java.util.List;
 
 @Entity
 public class User {
-    private String ID;
+    private String id;
     private String phone;
     private String email;
     private long password;
+    private String image;
+
+    private Privilege privilege;
 
     private List<Contact> contacts;
     private List<Order> orders;
 
-
-    public User(String ID, long password, String phone) {
-        this.ID = ID;
+    public User(String id, long password, String phone) {
+        this.id = id;
         this.password = password;
         this.phone = phone;
+        this.privilege = new Privilege();
     }
 
     public User() {
+        this.privilege = new Privilege();
     }
 
     @Id
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String name) {
-        this.ID = name;
+    public void setId(String name) {
+        this.id = name;
     }
 
     public long getPassword() {
@@ -58,7 +62,7 @@ public class User {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner" )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     public List<Contact> getContacts() {
         return contacts;
     }
@@ -76,8 +80,25 @@ public class User {
         this.orders = orders;
     }
 
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return ID;
+        return id;
     }
 }

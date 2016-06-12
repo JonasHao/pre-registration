@@ -3,7 +3,8 @@ package service;
 import po.Capacity;
 
 public interface CapacityService {
-    void refresh(Capacity capacity);
-
     Capacity get(long id);
+    void add(Capacity capacity);
+    void update(Capacity capacity);
+    void delete(long id);
 }

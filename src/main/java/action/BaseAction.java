@@ -20,6 +20,8 @@ import java.util.Map;
 public class BaseAction extends DefaultActionSupport {
     protected String result = SUCCESS;
 
+    public static final String USER_INACTIVE = "000";
+
     private Map<String, Object> data = new HashMap<>();
 
     public void addFieldError(String fieldName, String errorMessage, String code) {

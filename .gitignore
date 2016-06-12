@@ -74,3 +74,14 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+/.idea/modules/
+/.idea/compiler.xml
+/.idea/sqldialects.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/encodings.xml
+/.idea/copyright/profiles_settings.xml
+.idea/copyright/
+src/main/web/META-INF/
+src/test/resources/
+/src/main/resources/hibernate.cfg.xml

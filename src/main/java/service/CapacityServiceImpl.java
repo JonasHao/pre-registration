@@ -1,53 +1,35 @@
 package service;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import dao.BaseDao;
 import po.Capacity;
-
-import java.util.List;
 
 
 public class CapacityServiceImpl implements CapacityService {
-    private SessionFactory mSessionFactory;
+    private BaseDao dao;
 
     @Override
-    public void refresh(Capacity capacity) {
-        Session session = mSessionFactory.getCurrentSession();
-        session.beginTransaction();
-        session.refresh(capacity);
+    public void add(Capacity capacity){
+        dao.save(capacity);
     }
 
     @Override
     public Capacity get(long id) {
-        System.out.println("get Capacity of " + id);
-        Session session = mSessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        try {
-            Capacity capacity = session.get(Capacity.class, id);
-            System.out.printf("get capacity class of id:%d is:%s", id, capacity);
-            return capacity;
-        } catch (Exception e) {
-            System.out.println("ERROR CAPACITY");
-            e.printStackTrace();
-        }
-
-        try {
-            @SuppressWarnings("unchecked")
-            List<Capacity> capacities = session.createQuery("from Capacity where id=?").setParameter(0, id).list();
-            if (capacities.size() > 0) {
-                System.out.printf("get capacity query of id:%d is:%s", id, capacities.get(0));
-                return capacities.get(0);
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR CAPACITY");
-            e.printStackTrace();
-        }
-        return null;
+        return dao.get(Capacity.class, id);
     }
 
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        mSessionFactory = sessionFactory;
+    @Override
+    public void update(Capacity capacity){
+        dao.update(capacity);
     }
+
+    @Override
+    public void delete(long id){
+        Capacity capacity = get(id);
+        dao.delete(capacity);
+    }
+
+    public void setDao(BaseDao dao) {
+        this.dao = dao;
+    }
+
 }

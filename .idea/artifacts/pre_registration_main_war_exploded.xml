@@ -91,6 +91,7 @@
           <element id="library" level="project" name="Gradle: commons-lang:commons-lang:2.4" />
           <element id="library" level="project" name="Gradle: net.sf.ezmorph:ezmorph:1.0.6" />
           <element id="library" level="project" name="Gradle: javassist:javassist:3.11.0.GA" />
+          <element id="library" level="project" name="Gradle: net.sf.json-lib:json-lib:2.3:jdk15" />
         </element>
       </element>
     </root>

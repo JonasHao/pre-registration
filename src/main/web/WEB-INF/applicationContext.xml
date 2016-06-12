@@ -18,48 +18,70 @@
     </bean>
 
 
-    <bean id="doctorService" class="service.DoctorServiceImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-
-    <bean id="registrationService" class="service.RegistrationServiceImpl">
+    <bean id="orderService" class="service.OrderServiceImpl">
         <property name="capacityService" ref="capacityService"/>
         <property name="contactService" ref="contactService"/>
         <property name="sessionFactory" ref="sessionFactory"/>
         <property name="userService" ref="userService"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
     <bean id="capacityService" class="service.CapacityServiceImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
 
-    <bean id="registrationAction" class="action.RegistrationAction">
+    <bean id="orderAction" class="action.OrderAction">
         <property name="doctorService" ref="doctorService"/>
         <property name="userService" ref="userService"/>
-        <property name="registrationService" ref="registrationService"/>
+        <property name="orderService" ref="orderService"/>
         <property name="capacityService" ref="capacityService"/>
+        <property name="privilegeService" ref="privilegeService"/>
     </bean>
 
     <bean class="service.HospitalService" id="hospitalDao">
         <property name="dao" ref="baseDao"/>
     </bean>
+
     <bean class="action.HospitalAction" id="displayAction">
         <property name="hospitalDao" ref="hospitalDao"/>
     </bean>
 
     <bean class="action.DepartmentAction" id="departmentAction">
+        <property name="departmentService" ref="departmentService"/>
+        <property name="privilegeService" ref="privilegeService"/>
     </bean>
+
     <bean class="action.DoctorAction" id="doctorAction">
         <property name="doctorService" ref="doctorService"/>
+        <property name="departmentService" ref="departmentService"/>
+        <property name="privilegeService" ref="privilegeService"/>
     </bean>
     <bean class="service.ContactServiceImpl" id="contactService">
-        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="dao" ref="baseDao"/>
     </bean>
 
     <bean class="dao.BaseDao" id="baseDao">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean class="service.DepartmentServiceImpl" id="departmentService">
+        <property name="departmentDao" ref="baseDao"/>
+    </bean>
+
+    <bean class="service.PrivilegeServiceImpl" id="privilegeService">
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean class="action.ContactAction" id="contactAction">
+        <property name="contactService" ref="contactService"/>
+        <property name="privilegeService" ref="privilegeService"/>
+    </bean>
+    <bean class="service.DoctorServiceImpl" id="doctorService">
+        <property name="doctorDao" ref="baseDao"/>
+    </bean>
+    <bean class="action.CapacityAction" id="capacityAction">
+        <property name="capacityService" ref="capacityService"/>
+        <property name="doctorService" ref="doctorService"/>
     </bean>
 
 

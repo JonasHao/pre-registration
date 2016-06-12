@@ -1,11 +1,7 @@
 package action;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import po.*;
 import service.CapacityService;
-import service.ContactService;
-import org.apache.struts2.dispatcher.DefaultActionSupport;
 import service.*;
 
 import java.util.Date;
@@ -15,7 +11,7 @@ import java.util.List;
  * Created by Koche on 2016/4/27.
  * 这是挂号的Action，不是用户注册的
  */
-public class RegistrationAction extends DefaultActionSupport {
+public class OrderAction extends BaseAction {
     private long contactID;
     private long doctorID;
     private long capacityID;
@@ -30,14 +26,27 @@ public class RegistrationAction extends DefaultActionSupport {
     private String hospital;
     private String slot;
 
-    private DoctorService mDoctorService;
-    private RegistrationService mRegistrationService;
-    private UserService mUserService;
+    private long orderID;
+
+    private List<Long> list;
+
+    public List<Long> getList() {
+        return list;
+    }
+
+    public void setList(List<Long> list) {
+        this.list = list;
+    }
+
+    private DoctorService doctorService;
+    private OrderService orderService;
+    private UserService userService;
+    private PrivilegeService privilegeService;
     private CapacityService capacityService;
 
 
     public String fillOrder() throws Exception {
-        Doctor doctor = mDoctorService.get(doctorID);
+        Doctor doctor = doctorService.get(doctorID);
         doctorName = doctor.getName();
         department = doctor.getDepartment().getName();
         hospital = doctor.getDepartment().getHospital().getName();
@@ -49,13 +58,13 @@ public class RegistrationAction extends DefaultActionSupport {
 
         slot = capacity.getSlotString();
 
-        String userID = mUserService.getCurrentUserID();
+        String userID = privilegeService.getCurrentUserID();
 
         if (userID == null) {
             return INPUT;
         }
 
-        contacts = mUserService.findUserByID(userID).getContacts();
+        contacts = userService.get(userID).getContacts();
         if (contacts.size() > 0) {
             for (Contact c : contacts) {
                 if (c.isDefault()) {
@@ -78,21 +87,95 @@ public class RegistrationAction extends DefaultActionSupport {
      * @return "out"表示用户过期，需重新登陆。
      * @throws Exception
      */
-    public String order() throws Exception {
-        String userID = mUserService.getCurrentUserID();
+    public String commit() throws Exception {
+        String userID = privilegeService.getCurrentUserID();
         if (userID == null) {
-            return "out";
+            addData("error_code", USER_INACTIVE);
+            return result = ERROR;
+        }
+        try {
+            orderService.create(userID, capacityID, contactID);
+            return result = SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result = ERROR;
         }
 
-        if (mRegistrationService.create(userID, capacityID, contactID)) {
-            return SUCCESS;
-        }
-
-        return INPUT;
     }
 
-    public String unRegister() throws Exception {
-        return SUCCESS;
+    public String cancel() throws Exception {
+        String userID = privilegeService.getCurrentUserID();
+        if (userID == null) {
+            addData("error_code", USER_INACTIVE);
+            return result = ERROR;
+        }
+
+        try {
+            orderService.cancel(orderID);
+            return result = SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result = ERROR;
+        }
+    }
+
+    public String delete() throws Exception {
+        String userID = privilegeService.getCurrentUserID();
+        if (userID == null) {
+            addData("error_code", USER_INACTIVE);
+            return result = ERROR;
+        }
+        try {
+            orderService.delete(orderID);
+            return result = SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result = ERROR;
+        }
+    }
+
+
+    public String all() throws Exception {
+        User user = privilegeService.getCurrentUser();
+        if (user == null) {
+            addData("error_code", USER_INACTIVE);
+            return result = ERROR;
+        }
+
+        try {
+            addData("orders", user.getOrders());
+            return result = SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result = ERROR;
+        }
+    }
+
+    public String get() throws Exception {
+        User user = privilegeService.getCurrentUser();
+        if (user == null) {
+            addData("error_code", USER_INACTIVE);
+            return result = ERROR;
+        }
+
+        try {
+            Order order = orderService.get(orderID);
+            order.setHospital(null);
+            order.setDepartment(null);
+            order.setDoctor(null);
+            order.setUser(null);
+            addData("order", order);
+            return result = SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result = ERROR;
+        }
+    }
+
+
+    public String test() throws Exception {
+        System.out.println(list);
+        return result = SUCCESS;
     }
 
 
@@ -128,7 +211,6 @@ public class RegistrationAction extends DefaultActionSupport {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
 
     public String getDoctorName() {
         return doctorName;
@@ -186,18 +268,29 @@ public class RegistrationAction extends DefaultActionSupport {
         this.slot = slot;
     }
 
+    public long getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(long orderID) {
+        this.orderID = orderID;
+    }
+
     public void setDoctorService(DoctorService DoctorService) {
-        mDoctorService = DoctorService;
+        doctorService = DoctorService;
     }
 
     public void setUserService(UserService userService) {
-        mUserService = userService;
+        this.userService = userService;
     }
 
-    public void setRegistrationService(RegistrationService registrationService) {
-        mRegistrationService = registrationService;
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
+    public void setPrivilegeService(PrivilegeService privilegeService) {
+        this.privilegeService = privilegeService;
+    }
 
     public void setCapacityService(CapacityService capacityService) {
         this.capacityService = capacityService;

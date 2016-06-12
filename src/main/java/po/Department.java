@@ -13,17 +13,17 @@ public class Department {
     private long id;
     private String name;
     private String description;
-
+    private String image;
     private Hospital hospital;
     private List<Doctor> doctors = new ArrayList<>(10);
     private List<Order> orders = new ArrayList<>(10);
 
 
     @SuppressWarnings("unused")
-    public Department(String name, String description, int id) {
+    public Department(String name, String description, Hospital hospital) {
         this.name = name;
         this.description = description;
-        this.id = id;
+        this.hospital=hospital;
     }
 
     public Department() {
@@ -55,6 +55,14 @@ public class Department {
         this.description = type;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hospitalID", nullable = false)
     public Hospital getHospital() {
@@ -78,6 +86,8 @@ public class Department {
     public List<Order> getOrders() {
         return orders;
     }
+
+
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
