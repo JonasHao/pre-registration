@@ -1,5 +1,5 @@
 html,body,div,ul,li,a,span,p,img,canvas{padding: 0;margin: 0;font-family: "Microsoft Yahei";font-size: 100%;}
-body,html{width: 100%;height: 100%;}
+body,html{width: 100%;height: 100%;/*overflow-y: hidden;overflow-y: hidden;*/}
 
 button.btn-default{outline: none;}
 a{text-decoration: none;}
@@ -7,6 +7,7 @@ a:hover{text-decoration: none;}
 .clear{clear: both;}
 
 .space{display: none;}
+.container{display: block;}
 
 /*.container{display: block;}*/
 
@@ -22,6 +23,12 @@ a:hover{text-decoration: none;}
 .hospital-detail-top-right p.hospital-detail-name{padding-top: 20px;font-size: 25px;}
 .hospital-detail-top-right p.hospital-detail-description{padding-top: 3px;font-size: 15px;color: #808080;}
 
+.department-detail-top{padding: 20px 20px;border-bottom: 1px #ccc solid;margin-bottom: 20px;}
+.department-detail-top p.department-detail-name{padding-top: 20px;font-size: 25px;}
+.department-detail-top p.department-detail-description{padding-top: 3px;font-size: 15px;color: #808080;}
+.department-doctors{text-align: center;width: 70%;margin: 0 auto;}
+.department-doctors table th{text-align: center;}
+
 .user{display: none;}
 .login, .signup{width: 30%;margin-top: 50px;float: left;margin-left: 10%;}
 .loginAndSignup .form{width: 50%;margin: 0 auto;}
@@ -29,6 +36,22 @@ a:hover{text-decoration: none;}
 .loginAndSignup .panel-body{text-align: center;}
 .loginAndSignup .panel-body button{margin-right: 20px;}
 
-.order{width: 50%;margin-left: 25%;}
+.order{width: 80%;margin-left: 10%;}
+.order .table{width: 80%;margin: 0 auto;text-align: center;}
+.order .table th{text-align: center;min-width: 120px;}
+.order .table tr td button{text-align: center;margin: 0 10px;}
 
 .book{width: 50%;margin: 0 auto;}
+.book .panel .panel-body form p{padding: 5px 0;margin: 10px 0;border-bottom: 1px #ccc solid;}
+.book .panel .panel-body form .form-group{width: 20%;float: left;margin-right: 20px;}
+.book .panel .panel-body form .input-group{width: 65%;margin-bottom: 20px;}
+.book .panel .panel-body form .book-submit{text-align: center;}
+
+.alert{display: none;position: absolute;width: 100%;height: 100%;background: rgba(0,0,0,0.50);top: 0;}
+.alert button.closebtn{float: right;background: none;font-size: 18px;}
+.alert button.closebtn:hover{outline: none;}
+.alert .panel{width: 30%;margin: 0 auto;margin-top: 10%;}
+.alert .panel .panel-body form p{padding: 5px 0;margin: 10px 0;border-bottom: 1px #ccc solid;}
+.alert .panel .panel-body form .form-group{width: 60%;float: left;margin-right: 20px;}
+.alert .panel .panel-body form .input-group{margin-bottom: 20px;}
+.alert .panel .panel-body form .book-submit{text-align: center;}
