@@ -140,11 +140,8 @@
         </action>
 
         <action name="delete" class="action.HospitalAction" method="deleteHospital">
-            <result name="success" type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+            <result name="success" type="redirectAction">
+                <param name="actionName">list</param>
             </result>
         </action>
 
