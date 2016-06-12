@@ -126,15 +126,7 @@
 
     <package name="hospital" namespace="/hospital" extends="json-default">
         <action name="list" class="action.HospitalAction" method="query">
-            <result name="success" type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
-                <param name="excludeProperties">
-                    data
-                </param>
-            </result>
+            <result name="success">listView.jsp</result>
         </action>
 
         <action name="add" class="action.HospitalAction" method="addHospital">
@@ -148,11 +140,8 @@
         </action>
 
         <action name="delete" class="action.HospitalAction" method="deleteHospital">
-            <result name="success" type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+            <result name="success" type="redirectAction">
+                <param name="actionName">list</param>
             </result>
         </action>
 

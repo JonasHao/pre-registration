@@ -29,6 +29,9 @@ public class HospitalAction extends BaseAction {
     private Hospital hospital;
     private HospitalService hospitalService;
 
+    private List<Hospital> objects;
+    private Hospital object;
+
 
     /***
      * 根据条件查询医院列表, 默认查询所有医院，截取前10条记录
@@ -238,6 +241,23 @@ public class HospitalAction extends BaseAction {
 
     public void setHospitalAddress_detail(String hospitalAddress_detail) {
         this.hospitalAddress_detail = hospitalAddress_detail;
+    }
+
+
+    public List<Hospital> getObjects() {
+        return objects;
+    }
+
+    public void setObjects(List<Hospital> objects) {
+        this.objects = objects;
+    }
+
+    public Hospital getObject() {
+        return object;
+    }
+
+    public void setObject(Hospital object) {
+        this.object = object;
     }
 
     @Override
