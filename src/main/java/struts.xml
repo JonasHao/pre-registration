@@ -142,21 +142,16 @@
         </action>
 
         <action name="update" class="action.HospitalAction" method="updateHospital">
-            <result name="success" type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+            <result name="success" type="redirectAction">
+                <param name="actionName">list</param>
+
             </result>
         </action>
 
 
         <action name="getByID" class="action.HospitalAction" method="getHospitalByID">
-            <result name="success" type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="root">
-                    data
-                </param>
+            <result name="success">
+                hosInforView.jsp
             </result>
             <result name="error">error.jsp</result>
         </action>

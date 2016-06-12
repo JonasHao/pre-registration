@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>管理教师信息</title>
+    <title>管理医院信息</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
 </head>
@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;学生信息管理员后台系统</a>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;在线挂号系统后台</a>
         </div>
 
         <span class="navbar-text" style="float:right;"><a href="#">退出管理</a></span>
@@ -34,7 +34,7 @@
 
 
     <div class="container">
-        <p class="biao"><a>首页></a><a>管理教师信息</a></p>
+        <p class="biao"><a>首页></a><a>管理医院信息</a></p>
 
         <div class="row">
             <div class="col-xs-4">
@@ -57,9 +57,9 @@
             <div class="col-xs-12">
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <td style="background-color:#3fb4c6; color:#fff;width:15%;">id</td>
-                        <td style="background-color:#3fb4c6; color:#fff;width:25%;">名字</td>
-                        <td style="background-color:#3fb4c6; color:#fff;width:30%;">描述</td>
+                        <td style="background-color:#3fb4c6; color:#fff;width:15%;">医院id</td>
+                        <td style="background-color:#3fb4c6; color:#fff;width:25%;">医院名称</td>
+                        <td style="background-color:#3fb4c6; color:#fff;width:30%;">医院描述</td>
 
                         <td style="background-color:#3fb4c6; color:#fff;width:15%;">操作</td>
                     </tr>
@@ -72,7 +72,7 @@
                                 </s:param>
                             </s:url>
 
-                            <s:url var="update" action="update">
+                            <s:url var="update" action="getByID">
                                 <s:param name="hospitalID">
                                     <s:property value="id"/>
                                 </s:param>

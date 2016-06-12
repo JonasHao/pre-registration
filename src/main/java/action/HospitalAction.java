@@ -112,6 +112,9 @@ public class HospitalAction extends BaseAction {
     public String getHospitalByID() throws Exception {
         hospital = hospitalService.getByID(hospitalID);
         if (hospital != null) {
+            hospitalName = hospital.getName();
+            hospitalDes = hospital.getDescription();
+            hospitalID = hospital.getId();
             // prevent serialize orders
             hospital.setOrders(null);
             for(Department department :hospital.getDepartments()){
