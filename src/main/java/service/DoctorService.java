@@ -11,7 +11,7 @@ import java.util.List;
 public interface DoctorService {
     void add(Doctor doctor);
     Doctor get(long id);
-    List<Doctor> getDoctorByNmae(String name);
+    List<Doctor> getDoctorByName(String name);
     void update(Doctor department);
     void delete(long id);
 }

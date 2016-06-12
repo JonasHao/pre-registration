@@ -107,7 +107,7 @@ public class DoctorAction extends BaseAction {
     }
 
     public String getDoctors() throws Exception {
-        List<Doctor> doctorList = doctorService.getDoctorByNmae(name);
+        List<Doctor> doctorList = doctorService.getDoctorByName(name);
         if (doctorList.size() != 0){
             for(Doctor doctor : doctorList)
             {

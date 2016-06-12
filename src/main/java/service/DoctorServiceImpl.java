@@ -28,7 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<Doctor> getDoctorByNmae(String name){
+    public List<Doctor> getDoctorByName(String name){
         return doctorDao.query("from Doctor where name=?").setParameter(0,name).list();
     }
 
