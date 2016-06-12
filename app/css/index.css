@@ -1,12 +1,34 @@
 html,body,div,ul,li,a,span,p,img,canvas{padding: 0;margin: 0;font-family: "Microsoft Yahei";font-size: 100%;}
 body,html{width: 100%;height: 100%;}
 
+button.btn-default{outline: none;}
 a{text-decoration: none;}
 a:hover{text-decoration: none;}
 .clear{clear: both;}
 
-.panel .panel-body a{display: block; width: 33%;text-align: center;padding: 30px 20px;float: left;}
+.space{display: none;}
+
+/*.container{display: block;}*/
+
+.panel .panel-body a{display: block; width: 25%;text-align: center;padding: 30px 20px;float: left;}
 .panel .panel-body a img{width: 150px; height: 150px;}
 .panel .panel-body a p.name{color: black;padding: 8px 0px;}
-.panel .panel-body a p.detail{display: block;height: 14px;color: #ccc;font-size: 12px;overflow: hidden;}
+.panel .panel-body a p.detail{display: block;height: 14px;color: #808080;font-size: 12px;overflow: hidden;}
 
+.hospital-detail-top{padding: 20px 50px;border-bottom: 1px #ccc solid;}
+.hospital-detail-top-left, .hospital-detail-top-right{float: left;}
+.hospital-detail-top-left img{width: 120px;}
+.hospital-detail-top-right{margin-left: 30px;}
+.hospital-detail-top-right p.hospital-detail-name{padding-top: 20px;font-size: 25px;}
+.hospital-detail-top-right p.hospital-detail-description{padding-top: 3px;font-size: 15px;color: #808080;}
+
+.user{display: none;}
+.login, .signup{width: 30%;margin-top: 50px;float: left;margin-left: 10%;}
+.loginAndSignup .form{width: 50%;margin: 0 auto;}
+.loginAndSignup .form .input-group{margin-bottom: 20px;}
+.loginAndSignup .panel-body{text-align: center;}
+.loginAndSignup .panel-body button{margin-right: 20px;}
+
+.order{width: 50%;margin-left: 25%;}
+
+.book{width: 50%;margin: 0 auto;}
