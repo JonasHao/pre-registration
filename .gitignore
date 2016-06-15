@@ -85,3 +85,5 @@ gradle-app.setting
 src/main/web/META-INF/
 src/test/resources/
 /src/main/resources/hibernate.cfg.xml
+
+/doc/5 个人总结/

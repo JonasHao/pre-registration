@@ -49,3 +49,11 @@ label{
 .pagination>li>span {
     color:#3fb4c6 !important;
 }
+.label{
+    color: #0f0f0f;
+}
+
+table{
+    border-collapse:inherit;
+    border-spacing:10px;
+}

@@ -50,12 +50,12 @@
 					<div class="panel-body">
 						<div class="form">
 							<div class="input-group">
-							  	<span class="input-group-addon">用户名</span>
-							  	<input id="loginUserName" type="text" class="form-control" placeholder="username">
+								<span class="input-group-addon">用户名</span>
+								<input id="loginUserName" type="text" class="form-control" placeholder="username">
 							</div>
 							<div class="input-group">
-							  	<span class="input-group-addon">密码</span>
-							  	<input id="loginUserPass" type="password" class="form-control" placeholder="password">
+								<span class="input-group-addon">密码</span>
+								<input id="loginUserPass" type="password" class="form-control" placeholder="password">
 							</div>
 						</div>
 						<button type="button" id="login" class="btn-login btn btn-default">登录</button>
@@ -68,20 +68,20 @@
 					<div class="panel-body">
 						<div class="form">
 							<div class="input-group">
-							  	<span class="input-group-addon">用户名</span>
-							  	<input type="text" class="form-control" placeholder="Username">
+								<span class="input-group-addon">用户名</span>
+								<input type="text" class="form-control" placeholder="Username">
 							</div>
 							<div class="input-group">
-							  	<span class="input-group-addon">密码</span>
-							  	<input type="text" class="form-control" placeholder="password">
+								<span class="input-group-addon">密码</span>
+								<input type="text" class="form-control" placeholder="password">
 							</div>
 							<div class="input-group">
-							  	<span class="input-group-addon">手机</span>
-							  	<input type="text" class="form-control" placeholder="phone">
+								<span class="input-group-addon">手机</span>
+								<input type="text" class="form-control" placeholder="phone">
 							</div>
 							<div class="input-group">
-							  	<span class="input-group-addon">邮箱</span>
-							  	<input type="text" class="form-control" placeholder="email">
+								<span class="input-group-addon">邮箱</span>
+								<input type="text" class="form-control" placeholder="email">
 							</div>
 						</div>
 						<button type="button" class="btn-signup btn btn-default">注册</button>
@@ -90,24 +90,11 @@
 			</div>
 			<div class="loginAndSignup order">
 				<div class="panel panel-default">
-					<div class="panel-heading">个人信息</div>
+					<div class="panel-heading">我的预约</div>
 					<div class="panel-body">
-						<div class="input-group">
-						  	<span class="input-group-addon">用户名</span>
-						  	<input type="text" class="form-control" placeholder="Username">
-						</div>
-						<div class="input-group">
-						  	<span class="input-group-addon">密码</span>
-						  	<input type="text" class="form-control" placeholder="password">
-						</div>
-						<div class="input-group">
-						  	<span class="input-group-addon">手机</span>
-						  	<input type="text" class="form-control" placeholder="phone">
-						</div>
-						<div class="input-group">
-						  	<span class="input-group-addon">邮箱</span>
-						  	<input type="text" class="form-control" placeholder="email">
-						</div>
+						<table class='table table-bordered'>
+							<tbody></tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -116,7 +103,54 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">挂号</div>
 				<div class="panel-body">
-					
+					<form role="form">
+						<p>请选择要预约的医生</p>
+						<div class="form-group">
+							<select id="book-hospital" class="form-control">
+								<option value="中山医院">中山医院</option>
+								<option value="大学城医院">大学城医院</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select id="book-department" class="form-control">
+								<option value="内科">内科</option>
+								<option value="外科">外科</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select id="book-doctor" class="form-control">
+								<option value="郝俊楠">郝俊楠</option>
+								<option value="月圆">月圆</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select id="book-time" class="form-control">
+								<option value="2016-06-12">2016-06-12</option>
+								<option value="2016-06-14">2016-06-14</option>
+							</select>
+						</div>
+						<div class="clear"></div>
+						<div class="book-submit"><button type="button" class="btn btn-default">预约</button></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="alert">
+			<button class="closebtn btn btn-default">X</button>
+			<div class="doctor-time">
+				<div class="panel panel-default">
+					<div class="panel-heading">预约</div>
+					<div class="panel-body">
+						<form role="form">
+							<p><span style="font-size: bold;"></span>医生的值班时间如下: </p>
+							<div class="form-group">
+								<select class="form-control">
+									
+								</select>
+							</div>
+							<div class="book-submit"><button type="button" class="btn btn-default">预约</button></div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
